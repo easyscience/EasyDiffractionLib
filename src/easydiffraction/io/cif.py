@@ -9,13 +9,13 @@ from functools import partial
 from inspect import signature
 from io import StringIO
 from io import TextIOWrapper
-import numpy as np
 from numbers import Number
 from pathlib import Path
 from typing import List
 from typing import Tuple
 from typing import Union
 
+import numpy as np
 from easycrystallography.Components.AtomicDisplacement import AtomicDisplacement
 from easycrystallography.Components.Lattice import Lattice
 from easycrystallography.Components.SpaceGroup import SpaceGroup
@@ -1051,6 +1051,7 @@ def str2float(text):
             return 0
         raise ex
 
+
 def dataBlockToCif(block, includeBlockName=True):
     cif = ''
     if includeBlockName:
@@ -1069,13 +1070,15 @@ def dataBlockToCif(block, includeBlockName=True):
 
                 if isinstance(value, (float, int)):  # If parameter is of float type
                     value = np.float32(value)  # Simplifies output
-                    if param["fit"]:
-                        error = param["error"]
-                        #error = np.float32(error)  # Simplifies output
+                    if param['fit']:
+                        error = param['error']
+                        # error = np.float32(error)  # Simplifies output
                         if error == 0:
-                            paramStr = f'{value}()' # Adds empty brackets for standard uncertainty for free params
+                            # Adds empty brackets for standard uncertainty for free params
+                            paramStr = f'{value}()'
                         else:
-                            _, _, paramStr = toStdDevSmalestPrecision(value, error) # Adds brackets with standard uncertainty for free params
+                            # Adds brackets with standard uncertainty for free params
+                            _, _, paramStr = toStdDevSmalestPrecision(value, error)
                     else:
                         paramStr = str(value)  # Keeps 32bit presicion format in contrast to f'{...}'
                 elif isinstance(value, str):  # If parameter is of string type
@@ -1084,7 +1087,7 @@ def dataBlockToCif(block, includeBlockName=True):
                     else:
                         paramStr = f'{value}'
                 else:
-                    console.error(f'Unsupported parameter type {type(value)} for {value}')
+                    print(f'Unsupported parameter type {type(value)} for {value}')
                     continue
 
                 cif += f'{param["category"]}.{param["name"]} {paramStr}'
@@ -1116,21 +1119,22 @@ def dataBlockToCif(block, includeBlockName=True):
 
                     if isinstance(value, (float, int)):  # If parameter is number
                         if isinstance(value, float):
-                                value = np.float32(value)  # Simplifies output
-                        if param["fit"]:
-                            error = param["error"]
-                            #error = np.float32(error)  # Simplifies output
+                            value = np.float32(value)  # Simplifies output
+                        if param['fit']:
+                            error = param['error']
+                            # error = np.float32(error)  # Simplifies output
                             if error == 0:
-                                paramStr = f'{value}()' # Adds empty brackets for standard uncertainty for free params
+                                paramStr = f'{value}()'  # Adds empty brackets for standard uncertainty for free params
                             else:
-                                _, _, paramStr = toStdDevSmalestPrecision(value, error) # Adds brackets with standard uncertainty for free params
+                                # Adds brackets with standard uncertainty for free params
+                                _, _, paramStr = toStdDevSmalestPrecision(value, error)
                         else:
                             paramStr = str(value)  # Keeps 32bit precision format in contrast to f'{...}'
                     elif isinstance(value, str):  # If parameter is of string type
-                            if ' ' in value:  # Adds quotes to text with spaces, e.g. P n m a -> "P n m a"
-                                paramStr = f'"{value}"'
-                            else:
-                                paramStr = f'{value}'
+                        if ' ' in value:  # Adds quotes to text with spaces, e.g. P n m a -> "P n m a"
+                            paramStr = f'"{value}"'
+                        else:
+                            paramStr = f'{value}'
                     else:
                         print(f'Unsupported parameter type {type(value)} for {value}')
                         continue
@@ -1142,6 +1146,7 @@ def dataBlockToCif(block, includeBlockName=True):
     cif = cif.replace('\n\n\n', '\n\n')
     cif = cif.replace('\n\n\n', '\n\n')
     return cif
+
 
 def toStdDevSmalestPrecision(value, std_dev):
     if std_dev > 1:
@@ -1158,6 +1163,7 @@ def toStdDevSmalestPrecision(value, std_dev):
         clipped_std_dev = int(round(std_dev * 10**std_dev_decimals))
         value_with_std_dev_str = f'{value_str}({clipped_std_dev})'
     return value_str, std_dev_str, value_with_std_dev_str
+
 
 def dataBlockToCif_old(block, includeBlockName=True):
     """
