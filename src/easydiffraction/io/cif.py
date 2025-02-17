@@ -9,6 +9,7 @@ from functools import partial
 from inspect import signature
 from io import StringIO
 from io import TextIOWrapper
+import numpy as np
 from numbers import Number
 from pathlib import Path
 from typing import List
@@ -1050,8 +1051,118 @@ def str2float(text):
             return 0
         raise ex
 
-
 def dataBlockToCif(block, includeBlockName=True):
+    cif = ''
+    if includeBlockName:
+        cif += f'data_{block["name"]["value"]}'
+        cif += '\n\n'
+    if 'params' in block:
+        for category in block['params'].values():
+            # for param in category.values():
+            for param in category.values():
+                # `param` is an easyCore Parameter object
+                if 'optional' in param and param['optional']:
+                    continue
+                value = param['value']
+                if value is None:
+                    continue
+
+                if isinstance(value, (float, int)):  # If parameter is of float type
+                    value = np.float32(value)  # Simplifies output
+                    if param["fit"]:
+                        error = param["error"]
+                        #error = np.float32(error)  # Simplifies output
+                        if error == 0:
+                            paramStr = f'{value}()' # Adds empty brackets for standard uncertainty for free params
+                        else:
+                            _, _, paramStr = toStdDevSmalestPrecision(value, error) # Adds brackets with standard uncertainty for free params
+                    else:
+                        paramStr = str(value)  # Keeps 32bit presicion format in contrast to f'{...}'
+                elif isinstance(value, str):  # If parameter is of string type
+                    if ' ' in value:  # Adds quotes to text with spaces, e.g. P n m a -> "P n m a"
+                        paramStr = f'"{value}"'
+                    else:
+                        paramStr = f'{value}'
+                else:
+                    console.error(f'Unsupported parameter type {type(value)} for {value}')
+                    continue
+
+                cif += f'{param["category"]}.{param["name"]} {paramStr}'
+                cif += '\n'
+            cif += '\n'
+
+    if 'loops' in block:
+        for categoryName, category in block['loops'].items():
+            cif += '\nloop_\n'
+
+            # loop header
+            if not category:
+                continue
+            row0 = category[0]
+            for param in row0.values():
+                if 'optional' in param and param['optional']:
+                    continue
+                cif += f'{categoryName}.{param["name"]}\n'
+
+            # loop data
+            for row in category:
+                line = ''
+                for param in row.values():
+                    if 'optional' in param and param['optional']:
+                        continue
+                    value = param['value']
+                    if value is None:
+                        continue
+
+                    if isinstance(value, (float, int)):  # If parameter is number
+                        if isinstance(value, float):
+                                value = np.float32(value)  # Simplifies output
+                        if param["fit"]:
+                            error = param["error"]
+                            #error = np.float32(error)  # Simplifies output
+                            if error == 0:
+                                paramStr = f'{value}()' # Adds empty brackets for standard uncertainty for free params
+                            else:
+                                _, _, paramStr = toStdDevSmalestPrecision(value, error) # Adds brackets with standard uncertainty for free params
+                        else:
+                            paramStr = str(value)  # Keeps 32bit precision format in contrast to f'{...}'
+                    elif isinstance(value, str):  # If parameter is of string type
+                            if ' ' in value:  # Adds quotes to text with spaces, e.g. P n m a -> "P n m a"
+                                paramStr = f'"{value}"'
+                            else:
+                                paramStr = f'{value}'
+                    else:
+                        print(f'Unsupported parameter type {type(value)} for {value}')
+                        continue
+
+                    line += paramStr + ' '
+                line = line.rstrip()
+                cif += f'{line}\n'
+    cif = cif.strip()
+    cif = cif.replace('\n\n\n', '\n\n')
+    cif = cif.replace('\n\n\n', '\n\n')
+    return cif
+
+def toStdDevSmalestPrecision(value, std_dev):
+    if std_dev > 1:
+        value_str = f'{round(value)}'
+        std_dev_str = f'{round(std_dev)}'
+        value_with_std_dev_str = f'{value_str}({std_dev_str})'
+    else:
+        precision = 1
+        std_dev_decimals = precision - int(np.floor(np.log10(std_dev) + 1))
+        std_dev = round(std_dev, std_dev_decimals)
+        std_dev_str = f'{std_dev:.{std_dev_decimals}f}'
+        value = round(value, std_dev_decimals)
+        value_str = f'{value:.{std_dev_decimals}f}'
+        clipped_std_dev = int(round(std_dev * 10**std_dev_decimals))
+        value_with_std_dev_str = f'{value_str}({clipped_std_dev})'
+    return value_str, std_dev_str, value_with_std_dev_str
+
+def dataBlockToCif_old(block, includeBlockName=True):
+    """
+    Kept for reference
+    """
     cif = ''
     if includeBlockName:
         cif += f'data_{block["name"]["value"]}'
