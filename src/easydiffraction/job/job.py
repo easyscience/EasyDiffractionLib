@@ -1024,7 +1024,8 @@ class DiffractionJob(JobBase):
                 name = self.get_full_parameter_name(parameter.unique_name, parameter.display_name, parameter.url)
                 parameters['name'].append(f'<name>{name}</name>')
                 parameters['value'].append(parameter.value)
-                parameters['unit'].append(f'<unit>{parameter.unit:~P}</unit>')
+                # parameters['unit'].append(f'<unit>{parameter.unit:~P}</unit>')
+                parameters['unit'].append(f'<unit>{parameter.unit}</unit>')
                 parameters['error'].append(parameter.error) if parameter.error else parameters['error'].append('')
                 parameters['min'].append(parameter.min)
                 parameters['max'].append(parameter.max)
@@ -1037,7 +1038,8 @@ class DiffractionJob(JobBase):
             name = self.get_full_parameter_name(parameter.unique_name, parameter.display_name, parameter.url)
             parameters['name'].append(f'<name>{name}</name>')
             parameters['value'].append(parameter.value)
-            parameters['unit'].append(f'<unit>{parameter.unit:~P}</unit>')
+            # parameters['unit'].append(f'<unit>{parameter.unit:~P}</unit>')
+            parameters['unit'].append(f'<unit>{parameter.unit}</unit>')
             parameters['error'].append(parameter.error)
         return parameters
 

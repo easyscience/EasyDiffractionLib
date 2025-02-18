@@ -846,7 +846,8 @@ class Cryspy:
                             'k': peak_dat[idx]['index_hkl'][1],
                             'l': peak_dat[idx]['index_hkl'][2],
                         },
-                        'profile': scales[idx] * dependent[idx, :] / normalization,
+                        # 'profile': scales[idx] * dependent[idx, :] / normalization,
+                        'profile': dependent[idx, :] / normalization,
                         'components': {'total': dependent[idx, :]},
                         'profile_scale': scales[idx],
                     }
@@ -891,6 +892,9 @@ class Cryspy:
         model.items[idx] = phase_list
         data_name = crystals.data_name
 
+        # print("===========================================")
+        # print("        RUNNING PROFILE CALCULATION")
+        # print("===========================================")
         is_tof = False
         if self.model.PREFIX.lower() == 'tof':
             is_tof = True
@@ -917,13 +921,28 @@ class Cryspy:
 
         if not exp_name_model:
             # no exp defined, default
-            # exp_name_model_split = self.model.PREFIX
             exp_name_model = self.model.PREFIX + '_' + phase_name
             # get cryspy experiment dict from the model: expensive!
             # model -> dict
             setattr(self.model, 'data_name', phase_name)
             experiment_dict_model = self.model.get_dictionary()
             self._cryspyData._cryspyDict[exp_name_model] = experiment_dict_model
+
+        if is_tof and not exp_name_model.lower().startswith('tof'):
+            exp_name_model_orig = exp_name_model
+            # recast name from data_<name> to tof_<name>
+            exp_name_model_suffix = exp_name_model.split('_')[1]
+            exp_name_model = 'tof_' + exp_name_model_suffix
+            # get the dictionary from the model
+            experiment_dict_model = self.model.get_dictionary()
+            # remove old key
+            self._cryspyData._cryspyDict.pop(exp_name_model_orig)
+            # add new key
+            self._cryspyData._cryspyDict[exp_name_model] = experiment_dict_model
+            # modify type_name
+            self._cryspyData._cryspyDict[exp_name_model]['type_name'] = exp_name_model
+            # modify name
+            self._cryspyData._cryspyDict[exp_name_model]['name'] = exp_name_model_suffix
 
         self._cryspyDict = self._cryspyData._cryspyDict
 
@@ -936,6 +955,7 @@ class Cryspy:
         self._cryspyDict[exp_name_model]['excluded_points'] = self.excluded_points
         self._cryspyDict[exp_name_model]['radiation'] = [RAD_MAP[self.pattern.radiation]]
         if is_tof:
+            self._cryspyDict[exp_name_model]['profile_peak_shape'] = 'Gauss'
             self._cryspyDict[exp_name_model]['time'] = np.array(ttheta)  # required for TOF
             self._cryspyDict[exp_name_model]['time_max'] = ttheta[-1]
             self._cryspyDict[exp_name_model]['time_min'] = ttheta[0]

@@ -1078,7 +1078,7 @@ def dataBlockToCif(block, includeBlockName=True):
                             paramStr = f'{value}()'
                         else:
                             # Adds brackets with standard uncertainty for free params
-                            _, _, paramStr = toStdDevSmalestPrecision(value, error)
+                            _, _, paramStr = toStdDevSmallestPrecision(value, error)
                     else:
                         paramStr = str(value)  # Keeps 32bit presicion format in contrast to f'{...}'
                 elif isinstance(value, str):  # If parameter is of string type
@@ -1087,7 +1087,7 @@ def dataBlockToCif(block, includeBlockName=True):
                     else:
                         paramStr = f'{value}'
                 else:
-                    print(f'Unsupported parameter type {type(value)} for {value}')
+                    # print(f'Unsupported parameter type {type(value)} for {value}')
                     continue
 
                 cif += f'{param["category"]}.{param["name"]} {paramStr}'
@@ -1127,7 +1127,7 @@ def dataBlockToCif(block, includeBlockName=True):
                                 paramStr = f'{value}()'  # Adds empty brackets for standard uncertainty for free params
                             else:
                                 # Adds brackets with standard uncertainty for free params
-                                _, _, paramStr = toStdDevSmalestPrecision(value, error)
+                                _, _, paramStr = toStdDevSmallestPrecision(value, error)
                         else:
                             paramStr = str(value)  # Keeps 32bit precision format in contrast to f'{...}'
                     elif isinstance(value, str):  # If parameter is of string type
@@ -1136,7 +1136,7 @@ def dataBlockToCif(block, includeBlockName=True):
                         else:
                             paramStr = f'{value}'
                     else:
-                        print(f'Unsupported parameter type {type(value)} for {value}')
+                        # print(f'Unsupported parameter type {type(value)} for {value}')
                         continue
 
                     line += paramStr + ' '
@@ -1148,7 +1148,7 @@ def dataBlockToCif(block, includeBlockName=True):
     return cif
 
 
-def toStdDevSmalestPrecision(value, std_dev):
+def toStdDevSmallestPrecision(value, std_dev):
     if std_dev > 1:
         value_str = f'{round(value)}'
         std_dev_str = f'{round(std_dev)}'
