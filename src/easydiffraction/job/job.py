@@ -434,12 +434,14 @@ class DiffractionJob(JobBase):
             phases = self.sample.phases
             name = self.sample.name
 
-            self.sample = Sample(name=name,
-                                 parameters=parameters,
-                                 pattern=pattern,
-                                 phases=phases,
-                                 interface=self.interface,
-                                 dataset=self.datastore)  # 1980 ms
+            self.sample = Sample(
+                name=name,
+                parameters=parameters,
+                pattern=pattern,
+                phases=phases,
+                interface=self.interface,
+                dataset=self.datastore,
+            )  # 1980 ms
             self.sample.parameters = self.experiment.parameters  # 360 ms
             self.update_experiment_type()
             self.update_interface()
