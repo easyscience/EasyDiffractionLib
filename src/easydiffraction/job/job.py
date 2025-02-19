@@ -156,6 +156,7 @@ class DiffractionJob(JobBase):
     def sample(self, value: Union[Sample, None]) -> None:
         # We need to deepcopy the sample to ensure that it is not shared between jobs
         if value is not None:
+            del self._sample
             self._sample = value
             # self._sample = deepcopy(value) # TODO fix deepcopy on EXC sample
         else:
@@ -432,8 +433,14 @@ class DiffractionJob(JobBase):
             pattern = self.experiment.pattern
             phases = self.sample.phases
             name = self.sample.name
-            self.sample = Sample(name, parameters=parameters, pattern=pattern, phases=phases)
-            self.sample.parameters = self.experiment.parameters
+
+            self.sample = Sample(name=name,
+                                 parameters=parameters,
+                                 pattern=pattern,
+                                 phases=phases,
+                                 interface=self.interface,
+                                 dataset=self.datastore)  # 1980 ms
+            self.sample.parameters = self.experiment.parameters  # 360 ms
             self.update_experiment_type()
             self.update_interface()
         # Temporary fix for dtt1 and dtt2 parameters read from CIF in Scipp format
@@ -636,8 +643,8 @@ class DiffractionJob(JobBase):
             self.interface._InterfaceFactoryTemplate__interface_obj.set_experiment_type(
                 tof=self.type.is_tof, pol=self.type.is_pol
             )
-        self.interface.generate_bindings(self)
-        self.generate_bindings()
+        # self.interface.generate_bindings(self)
+        # self.generate_bindings()
 
     # Charts
 

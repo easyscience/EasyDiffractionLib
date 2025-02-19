@@ -846,7 +846,6 @@ class Cryspy:
                             'k': peak_dat[idx]['index_hkl'][1],
                             'l': peak_dat[idx]['index_hkl'][2],
                         },
-                        # 'profile': scales[idx] * dependent[idx, :] / normalization,
                         'profile': dependent[idx, :] / normalization,
                         'components': {'total': dependent[idx, :]},
                         'profile_scale': scales[idx],

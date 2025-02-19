@@ -1136,8 +1136,7 @@ def dataBlockToCif(block, includeBlockName=True):
                         else:
                             paramStr = f'{value}'
                     else:
-                        # print(f'Unsupported parameter type {type(value)} for {value}')
-                        continue
+                        paramStr = str(value)
 
                     line += paramStr + ' '
                 line = line.rstrip()
