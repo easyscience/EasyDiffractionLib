@@ -1,4 +1,3 @@
-import pytest
 from numpy.testing import assert_almost_equal
 
 import easydiffraction as ed
@@ -49,7 +48,6 @@ def test_fitting_pd_neut_cwl_LBCO_HRPT() -> None:
     assert_almost_equal(job.fitting_results.reduced_chi, 1.25, decimal=2)
 
 
-@pytest.mark.skip(reason='Fails at the moment - needs fixing!')
 def test_fitting_pd_neut_tof_Si_SEPD() -> None:
     """
     Test fitting of Si from neutron diffraction data in a time-of-flight
@@ -64,9 +62,9 @@ def test_fitting_pd_neut_tof_Si_SEPD() -> None:
     phase.atom_sites.append(
         label='Si',
         type_symbol='Si',
-        fract_x=0,
-        fract_y=0,
-        fract_z=0,
+        fract_x=0.125,
+        fract_y=0.125,
+        fract_z=0.125,
         occupancy=1,
         b_iso_or_equiv=0.529,
     )
@@ -97,6 +95,8 @@ def test_fitting_pd_neut_tof_Si_SEPD() -> None:
 
     job.fit()
 
+    assert phase.space_group.name_hm_alt.raw_value == 'F d -3 m'
+    assert phase.space_group.it_coordinate_system_code.raw_value == '2'
     assert job.fitting_results.minimizer_engine.package == 'lmfit'
     assert job.fitting_results.x.size == 5600
     assert job.fitting_results.n_pars == 12
