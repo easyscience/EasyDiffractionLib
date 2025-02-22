@@ -930,11 +930,14 @@ class Cryspy:
             experiment_dict_model = self.model.get_dictionary()
             self._cryspyData._cryspyDict[exp_name_model] = experiment_dict_model
 
-        if is_tof and not exp_name_model.lower().startswith('tof'):
+        # assure correct exp_name_model prefix.
+        # for cwl it is 'pd_<name>', for tof it is 'tof_<name>'
+        # if is_tof and not exp_name_model.lower().startswith('tof'):
+        if not exp_name_model.lower().startswith(self.model.PREFIX):
             exp_name_model_orig = exp_name_model
             # recast name from data_<name> to tof_<name>
             exp_name_model_suffix = exp_name_model.split('_')[1]
-            exp_name_model = 'tof_' + exp_name_model_suffix
+            exp_name_model = self.model.PREFIX + '_' + exp_name_model_suffix
             # get the dictionary from the model
             experiment_dict_model = self.model.get_dictionary()
             # remove old key
