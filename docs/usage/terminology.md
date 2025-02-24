@@ -1,18 +1,54 @@
-# Dictionaries
+# Terminology
+
+This page provides definitions of common **abbreviations**, **parameter names**
+and **data formats** used in EasyDiffraction.
+
+## Input/Output data format
+
+EasyDiffraction uses the **Crystallographic Information File (CIF)** format for
+both input and output. CIF is a widely used, **human-readable** format for
+crystallographic data, as specified by the
+[International Union of Crystallography (IUCr)](https://www.iucr.org)
+
+If certain experimental data is not covered by standard CIF dictionaries,
+EasyDiffraction introduces **custom CIF keywords**, which are defined below.
+
+## Glossary
+
+Below are common abbreviations used in the documentation and tutorials.
+
+### Dictionary type labels
+
+- [coreCIF][1]{:.label-cif} Core CIF dictionary by the
+  [IUCr](https://www.iucr.org).
+- [pdCIF][2]{:.label-cif} Powder CIF dictionary by the
+  [IUCr](https://www.iucr.org).
+- [customCIF][0]{:.label-cif} Custom CIF dictionary developed for
+  EasyDiffraction.
+
+### Experiment type labels
+
+#### Neutron diffraction
+
+- [pd-neut-cwl][0]{:.label-experiment} Powder neutron diffraction with constant
+  wavelength.
+- [pd-neut-tof][0]{:.label-experiment} Powder neutron diffraction with
+  time-of-flight.
+- [sc-neut-cwl][0]{:.label-experiment} Single-crystal neutron diffraction with
+  constant wavelength.
+
+#### X-ray diffraction
+
+- [pd-xray][0]{:.label-experiment} Powder X-ray diffraction.
+
+## Dictionaries
 
 All parameter names used in EasyDiffraction are divided into several
 dictionaries given below. Each keyword in the dictionaries has one badge showing
 the corresponding type of dictionary, and can have one or more badges showing
 the type of experiment to which the keyword belongs.
 
-## Crystallographic information file
-
-EasyDiffraction input and output files use the simple, human-readable STAR/CIF
-data format, following the specifications of
-[International Union of Crystallography](https://www.iucr.org) (IUCr), wherever
-possible.
-
-## Model dictionary
+### Model dictionary
 
 This dictionary provides data names for describing model parameters.
 
@@ -48,7 +84,7 @@ This dictionary provides data names for describing model parameters.
   - [\_atom_site.Wyckoff_symbol](dictionaries/_atom_site.md)
     [coreCIF][1]{:.label-cif}
 
-## Experiment and instrument dictionary
+### Experiment and instrument dictionary
 
 This dictionary provides data names for describing experimental and instrumental
 parameters.

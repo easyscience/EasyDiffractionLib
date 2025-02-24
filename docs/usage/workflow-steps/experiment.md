@@ -1,14 +1,26 @@
-# Experiment
+---
+icon: material/microscope
+---
 
-This section describes different types of experimental data which
-EasyDiffraction can handle.
+# :material-microscope: Experiment
 
-## CIF-based description
+The **Experiment** section describes the different types of **experimental
+diffraction data** that EasyDiffraction can process. This includes both
+**constant-wavelength neutron diffraction (CWL)**, **time-of-flight neutron
+diffraction (TOF)**, and **single-crystal neutron diffraction (SC CWL)**.
 
-The following examples show the CIF data blocks for different types of
+EasyDiffraction supports **CIF-based(()) data formats and can also handle
+**measured data files\*\* in standard formats.
+
+## CIF-based data description
+
+The following examples demonstrate the **CIF data blocks** for different
 diffraction experiments supported in EasyDiffraction.
 
 ### [pd-neut-cwl][3]{:.label-experiment}
+
+This example represents a constant-wavelength neutron powder diffraction
+experiment:
 
 <!-- prettier-ignore-start -->
 <div class="cif">
@@ -73,6 +85,9 @@ loop_
 <!-- prettier-ignore-end -->
 
 ### [pd-neut-tof][3]{:.label-experiment}
+
+This example demonstrates a time-of-flight neutron powder diffraction
+experiment:
 
 <!-- prettier-ignore-start -->
 <div class="cif">
@@ -143,6 +158,8 @@ loop_
 
 ### [sc-neut-cwl][3]{:.label-experiment}
 
+This example represents a single-crystal neutron diffraction experiment:
+
 <!-- prettier-ignore-start -->
 <div class="cif">
 <pre>
@@ -190,21 +207,24 @@ loop_
 </div>
 <!-- prettier-ignore-end -->
 
-## Other supported data files
+## Other supported data formats
 
-If you do not have a CIF file with both the instrumental parameters and measured data, as in the example (hrpt.cif) from the previous section, you can import only measured data. In that case, the data are then automatically converted into CIF with default parameters. These can be later edited in the code.
+If instrumental parameters are not available in a CIF file, EasyDiffraction
+allows importing **measured data files** in standard formats. These files are
+automatically converted into **CIF format** with default parameters, which can
+be later modified within the software.
 
-The following measured data formats are supported:
+#### Supported data file formats:
 
-* If standard deviations of measured intensities are present, the file should have either `*.xye` or `*.xys` extension and contain the following 3 columns:
-    * [\_pd_meas.2theta\_scan](dictionaries/_pd_meas.md), 
+* `.xye` or `.xys` (3 columns, including standard deviations)
+    * [\_pd_meas.2theta\_scan](dictionaries/_pd_meas.md),
     * [\_pd_meas.intensity\_total](dictionaries/_pd_meas.md), 
     * [\_pd_meas.intensity\_total\_su](dictionaries/_pd_meas.md).
-* If standard deviations of measured intensities are not given, the file should have `*.xy` extension and contain the following 2 columns: 
+* `.xy` (2 columns, no standard deviations):
     * [\_pd_meas.2theta\_scan](dictionaries/_pd_meas.md),
     * [\_pd_meas.intensity\_total](dictionaries/_pd_meas.md). 
 
-In the second case, the standard deviations [\_pd_meas.intensity\_total\_su](dictionaries/_pd_meas.md) are calculated as the square root of the measured intensities [\_pd_meas.intensity\_total](dictionaries/_pd_meas.md).
+If no **standard deviations** are provided, they are automatically calculated as the **square root** of measured intensities.
 
 Optional comments with `#` are possible in data file headers.
 
@@ -275,3 +295,6 @@ Here are some examples:
 <!-- prettier-ignore-start -->
 [3]: glossary.md
 <!-- prettier-ignore-end -->
+
+Now that the Experiment has been defined, you can proceed to the next step:
+[Analysis](analysis.md).

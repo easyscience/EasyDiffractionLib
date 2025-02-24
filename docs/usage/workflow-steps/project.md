@@ -1,9 +1,22 @@
-# Project structure
+---
+icon: material/archive
+---
 
-## CIF-based project files
+# :material-archive: Project
 
-Example project structure for the constant wavelength powder neutron diffraction
-measurement is given below:
+The **Project** serves as a container for all data and metadata associated with
+a diffraction experiment. It acts as the top-level entity in EasyDiffraction,
+ensuring structured organization and easy access to relevant information. Each
+project can contain multiple **experimental datasets**, with each dataset
+containing contribution from multiple **physical models**.
+
+## Project structure
+
+The example below illustrates a typical **project structure** for a
+**constant-wavelength powder neutron diffraction** experiment:
+
+Each file within the **Project** directory plays a crucial role in defining,
+analyzing, and refining diffraction experiments.
 
 <!-- prettier-ignore-start -->
 
@@ -24,9 +37,14 @@ measurement is given below:
 
 <!-- prettier-ignore-end -->
 
-Here is the content of the project files:
+## Project Files
+
+Below is a detailed breakdown of the content within each project file.
 
 ### <span class="orange">project.cif</span>
+
+This file provides an overview of the project, linking relevant **models** and
+**experimental datasets**.
 
 <!-- prettier-ignore-start -->
 
@@ -49,6 +67,9 @@ hrpt.cif
 <!-- prettier-ignore-end -->
 
 ### models / <span class="orange">lbco.cif</span>
+
+This file contains crystallographic information, including **space group**,
+**unit cell parameters**, and **atomic positions**.
 
 <!-- prettier-ignore-start -->
 
@@ -85,6 +106,9 @@ O  O    0   0.5 0.5   1    Biso 1.4041
 <!-- prettier-ignore-end -->
 
 ### experiments / <span class="orange">hrpt.cif</span>
+
+This file contains **instrumental parameters** and **measured diffraction
+data**.
 
 <!-- prettier-ignore-start -->
 
@@ -149,3 +173,6 @@ loop_
 </div>
 
 <!-- prettier-ignore-end -->
+
+Now that the Project has been defined, you can proceed to the next step:
+[Model](model.md).

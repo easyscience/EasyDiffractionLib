@@ -1,30 +1,19 @@
-![](assets/images/ed-logo_dark.svg#gh-dark-mode-only)![](assets/images/ed-logo_light.svg#gh-light-mode-only)
+![](assets/images/logo_dark.svg#gh-dark-mode-only)![](assets/images/logo_light.svg#gh-light-mode-only)
 
-# Making diffraction data analysis easy
+# Diffraction data analysis library
 
-## About
+Here is a brief overview of the main documentation sections:
 
-EasyDiffraction is scientific software for calculating neutron powder
-diffraction patterns based on a structural model and refining its parameters
-against experimental data.
-
-EasyDiffraction is distributed as both a cross-platform desktop application and
-a Python library.
-
-Here you can find instructions for using the EasyDiffraction Python library.
-Documentation for the EasyDiffraction graphical user interface can be found
-[elsewhere](https://docs.easydiffraction.org/app).
-
-EasyDiffraction is part of the
-[EasyScience framework](https://easyscience.software), briefly described in the
-next section.
-
-## License
-
-EasyDiffraction is licensed under the
-[BSD 3-Clause License](https://raw.githubusercontent.com/EasyScience/EasyDiffractionLib/master/LICENSE).
-
-## Latest release
-
-The latest release of EasyDiffraction Python library is
-[{{ vars.release_version }}](https://github.com/EasyScience/EasyDiffractionLib/releases/latest).
+- [:material-information-slab-circle: Introduction](introduction) - Provides an
+  overview of EasyDiffraction, including its purpose, licensing, latest release
+  information, and contact details.
+- [:material-cog-box: Installation & Setup](installation) - Guides users through
+  system requirements, environment setup, and the installation process.
+- [:material-book-open-variant: User Guide](usage) - Explains core concepts,
+  workflow steps, and parameters required for using EasyDiffraction effectively.
+- [:material-school: Hands-on Tutorials](tutorials) - Provides complete,
+  practical examples to demonstrate common workflows and data analysis tasks.
+- [:material-code-braces-box: API Reference](api) - Auto-generated reference
+  detailing the functions and modules available in EasyDiffraction.
+- [:material-account-plus: Contributing](contributing) - Outlines the guidelines
+  and procedures for contributing to the EasyDiffraction project.

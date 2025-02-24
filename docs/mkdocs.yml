@@ -1,6 +1,6 @@
 # Project information
 site_name: EasyDiffraction Library
-site_url: https://easyscience.github.io/diffraction-lib
+site_url: https://docs.diffraction.org/lib
 
 # Repository
 repo_url: https://github.com/easyscience/diffraction-lib
@@ -10,23 +10,27 @@ edit_uri: edit/develop/docs/
 copyright: © 2025 EasyDiffraction
 
 # Format and layout of the global navigation for the site
-not_in_nav: |
-  dictionaries
 nav:
-  - Introduction: index.md
-  - EasyScience: easyscience.md
-  - Getting started: getting-started.md
-  - Glossary: glossary.md
-  - Dictionaries: dictionaries.md
-  - Project structure: project-structure.md
-  - Model: model.md
-  - Experiment: experiment.md
-  - Analysis: analysis.md
-  - How to use:
-      - how-to-use/index.md
-      - Basic:
-          - Define model: examples/Define-model.ipynb
-          - Define experiment: examples/Define-experiment.ipynb
+  - Introduction:
+      - Introduction: introduction/index.md
+  - Installation & Setup:
+      - Installation & Setup: installation/index.md
+  - User Guide:
+      - User Guide: usage/index.md
+      - Terminology: usage/terminology.md
+      - Getting Started: usage/getting-started.md
+      - Workflow Steps:
+          - Workflow Steps: usage/workflow-steps/index.md
+          - Project: usage/workflow-steps/project.md
+          - Model: usage/workflow-steps/model.md
+          - Experiment: usage/workflow-steps/experiment.md
+          - Analysis: usage/workflow-steps/analysis.md
+          - Summary: usage/workflow-steps/summary.md
+  - Hands-on Tutorials:
+      - Hands-on Tutorials: tutorials/index.md
+      - Basic Examples:
+          - Define Model: examples/Define-model.ipynb
+          - Define Experiment: examples/Define-experiment.ipynb
       - Simulation:
           - pd-xray NaCl: examples/Simulation_pd-xray_NaCl.ipynb
       - Fitting:
@@ -35,5 +39,9 @@ nav:
           - pd-neut-tof NCAF-WISH: examples/Fitting_pd-neut-tof_NCAF-WISH.ipynb
       - Advanced fitting:
           - MCMC pd-neut-tof NCAF-WISH: examples/Fitting-emcee_pd-neut-cwl_LBCO-HRPT.ipynb
-      - Extra:
-          - Change minimizer: examples/Change-minimizer.ipynb
+      - Additional examples:
+          - Change Minimizer: examples/Change-minimizer.ipynb
+  - API Reference:
+      - API Reference: api/index.md
+  - Contributing:
+      - Contributing: contributing/index.md
