@@ -126,8 +126,8 @@ jobs:
       # The file is created by merging two files:
       # - assets-docs/mkdocs.yml - the common configuration (theme, plugins, etc.)
       # - docs/mkdocs.yml - the project-specific configuration (project name, TOC, etc.)
-      - name: Create mkdocs.yml file
-        run: python tools/create_mkdocs-yml.py
+      #- name: Create mkdocs.yml file
+      #  run: python tools/create_mkdocs-yml.py
 
       # Build the static files
       # Input: docs/ directory containing the Markdown files
