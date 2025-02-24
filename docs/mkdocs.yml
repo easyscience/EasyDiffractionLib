@@ -9,7 +9,13 @@ edit_uri: edit/develop/docs/
 # Copyright
 copyright: © 2025 EasyDiffraction
 
+plugins:
+  - mkdocs-jupyter:
+      ignore: ['*emcee*.ipynb']
+
 # Format and layout of the global navigation for the site
+not_in_nav: |
+  usage/dictionaries
 nav:
   - Introduction:
       - Introduction: introduction/index.md
