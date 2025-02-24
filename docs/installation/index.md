@@ -6,9 +6,9 @@ icon: material/cog-box
 
 ## Requirements
 
-EasyDiffraction is a multi-platform Python library compatible with **Python 3.9
-through 3.12**. Ensure Python is installed on your system before proceeding with
-the installation.
+EasyDiffraction is a multi-platform Python library compatible with **Python
+3.9 through 3.12**. Ensure Python is installed
+on your system before proceeding with the installation.
 
 ## Environment setup <small>optional</small> { #environment-setup data-toc-label="Environment setup" }
 
@@ -22,28 +22,26 @@ recreate the environment.
   ```console
   python3 -m venv venv
   ```
-  <!-- prettier-ignore-start -->
+<!-- prettier-ignore-start -->
 - Activate the environment:
 
-      === ":material-apple: macOS"
-          ```console
-          . venv/bin/activate
-          ```
-      === ":material-linux: Linux"
-          ```console
-          . venv/bin/activate
-          ```
-      === ":fontawesome-brands-windows: Windows"
-          ```console
-          . venv/Scripts/activate      # Windows with Unix like shells
-          .\venv\Scripts\activate.bat  # Windows with CMD
-          .\venv\Scripts\activate.ps1  # Windows with Power shell
-          ```
-
-  <!-- prettier-ignore-end -->
-
-- The terminal should now show `(venv)`, indicating that the virtual environment
-  is active.
+    === ":material-apple: macOS"
+        ```console
+        . venv/bin/activate
+        ```
+    === ":material-linux: Linux"
+        ```console
+        . venv/bin/activate
+        ```
+    === ":fontawesome-brands-windows: Windows"
+        ```console
+        . venv/Scripts/activate      # Windows with Unix like shells
+        .\venv\Scripts\activate.bat  # Windows with CMD
+        .\venv\Scripts\activate.ps1  # Windows with Power shell
+        ```
+<!-- prettier-ignore-end -->
+- The terminal should now show `(venv)`, indicating that the virtual
+  environment is active.
 
 #### Deactivating and Removing the Virtual Environment:
 
@@ -51,36 +49,35 @@ recreate the environment.
   ```console
   deactivate
   ```
-  <!-- prettier-ignore-start -->
+<!-- prettier-ignore-start -->
 - If this environment is no longer needed, delete it:
 
-      === ":material-apple: macOS"
-          ```console
-          rm -rf venv
-          ```
-      === ":material-linux: Linux"
-          ```console
-          rm -rf venv
-          ```
-      === ":fontawesome-brands-windows: Windows"
-          ```console
-          rmdir /s /q venv
-          ```
-
-  <!-- prettier-ignore-end -->
+    === ":material-apple: macOS"
+        ```console
+        rm -rf venv
+        ```
+    === ":material-linux: Linux"
+        ```console
+        rm -rf venv
+        ```
+    === ":fontawesome-brands-windows: Windows"
+        ```console
+        rmdir /s /q venv
+        ```
+<!-- prettier-ignore-end -->
 
 ## Installation guide
 
 ### Installing from PyPI <small>recommended</small> { #from-pypi data-toc-label="Installing from PyPI" }
 
-EasyDiffraction is available on **PyPI (Python Package Index)** and can be
-installed using `pip`. It is recommended to install it within a
+EasyDiffraction is available on **PyPI (Python Package Index)** and
+can be installed using `pip`. It is recommended to install it within a
 [virtual environment](#environment-setup).
 
-We recommend installing the latest release of EasyDiffraction with the `charts`
-extras, which include optional dependencies used for simplified visualization of
-charts and tables. This can be especially useful for running the Jupyter
-Notebook examples. To do so, use the following command:
+We recommend installing the latest release of EasyDiffraction with the
+`charts` extras, which include optional dependencies used for simplified
+visualization of charts and tables. This can be especially useful for running
+the Jupyter Notebook examples. To do so, use the following command:
 
 ```console
 pip install 'easydiffraction[charts]'
@@ -132,7 +129,7 @@ pip install 'easydiffraction[charts] @ git+https://github.com/easyscience/diffra
 
 EasyDiffraction provides a collection of **Jupyter Notebook examples** that
 demonstrate various functionalities. These tutorials are available in the
-[Hands-on Tutorials](tutorials/index.md#how-to-use) section of the
+[:material-school: Hands-on tutorials](../tutorials/index.md) section of the
 documentation.
 
 You can also run these tutorials:
@@ -141,21 +138,21 @@ You can also run these tutorials:
 - **Online via Google Colab** (no local installation required)
 
 These Jupyter Notebook examples can be downloaded either one by one from the
-[Hands-on Tutorials](tutorials/index.md#how-to-use) section or all together as a
-zip archive from the
+[:material-school: Hands-on tutorials](../tutorials/index.md) section or all
+together as a zip archive from the
 [EasyDiffraction releases](https://github.com/easyscience/diffraction-lib/releases/latest).
 
 ### Run tutorials locally
 
-To run tutorials locally, install Jupyter Notebook or JupyterLab. Here are the
-steps to take in the case of Jupyter Notebook:
+To run tutorials locally, install Jupyter Notebook or JupyterLab.
+Here are the steps to take in the case of Jupyter Notebook:
 
 - Install Jupyter Notebook:
   ```console
   pip install notebook
   ```
-- Download the latest EasyDiffraction tutorial examples from GitHub, e.g., using
-  curl:
+- Download the latest EasyDiffraction tutorial examples from GitHub, e.g.,
+  using curl:
   ```console
   curl --location --remote-name https://github.com/easyscience/diffraction-lib/releases/latest/download/examples.zip
   ```
@@ -181,10 +178,11 @@ local installation.
 To use Google Colab:
 
 - Ensure you have a **Google account**.
-- Navigate to the **[Hands-on Tutorials](tutorials/index.md#how-to-use)**
-  section of the documentation.
+- Navigate to the
+  **[:material-school: Hands-on tutorials](../tutorials/index.md)** section of
+  the documentation.
 - Click the :google-colab: **Open in Google Colab** button available for each
-  example.
+  tutorial.
 
-This method allows you to experiment with EasyDiffraction tutorials instantly,
-without setting up a Python environment on your system.
+This method allows you to experiment with EasyDiffraction tutorials
+instantly, without setting up a Python environment on your system.

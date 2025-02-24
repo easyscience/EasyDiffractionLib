@@ -68,14 +68,15 @@ def merge_yaml(base_config: Dict[str, Any], override_config: Dict[str, Any]) -> 
 
     return merged_config
 
+
 def merge_lists(base_list: List[Any], override_list: List[Any]) -> List[Any]:
     """
-    Merges two lists while ensuring dictionaries are merged intelligently
+    Merges two lists while ensuring dictionaries with the same key are merged
     and other values are appended without duplication.
 
-    - If an item in the list is a dictionary, check if an identical dictionary already exists.
-    - If an item is a list, convert it to a tuple for comparison.
-    - If an item is a non-dictionary value, ensure it is unique before adding.
+    - If an item in the list is a dictionary with a single key, and a matching dictionary exists,
+      they are merged instead of duplicated.
+    - Other values are added uniquely.
 
     Args:
         base_list (list): The base list.
@@ -84,25 +85,24 @@ def merge_lists(base_list: List[Any], override_list: List[Any]) -> List[Any]:
     Returns:
         list: The merged list.
     """
-    def hashable(value):
-        """Convert a dictionary or list into a hashable representation."""
-        if isinstance(value, dict):
-            return tuple(sorted((k, hashable(v)) for k, v in value.items()))
-        elif isinstance(value, list):
-            return tuple(hashable(v) for v in value)
-        return value  # Primitive types (str, int, etc.) remain unchanged
+    merged_list = []
+    seen_items = {}
 
-    merged_list = base_list.copy()
-    seen_items = set(hashable(item) for item in merged_list)
+    for item in base_list + override_list:
+        if isinstance(item, dict) and len(item) == 1:
+            key = next(iter(item))  # Extract dictionary key (e.g., "mkdocs-jupyter")
+            if key in seen_items:
+                seen_items[key] = merge_yaml(seen_items[key], item[key])  # Merge dictionaries
+            else:
+                seen_items[key] = item[key]
+        elif item not in merged_list:
+            merged_list.append(item)
 
-    for override_item in override_list:
-        hashable_override = hashable(override_item)
-        if hashable_override not in seen_items:
-            merged_list.append(override_item)
-            seen_items.add(hashable_override)
+    # Convert merged dictionary values back into list format
+    for key, value in seen_items.items():
+        merged_list.append({key: value})
 
     return merged_list
-
 
 
 def save_yaml(data: Dict[str, Any], output_file: str) -> None:

@@ -5,8 +5,8 @@ icon: material/puzzle
 # :material-puzzle: Model
 
 The **Model** in EasyDiffraction represents the **crystallographic structure**
-used to calculate the diffraction pattern. This pattern is then compared to the
-**experimental data** to analyze and refine the structural parameters.
+used to calculate the diffraction pattern. This pattern is then compared to
+the **experimental data** to analyze and refine the structural parameters.
 
 EasyDiffraction allows you to:
 
@@ -16,12 +16,12 @@ EasyDiffraction allows you to:
 Below, you will find instructions on how to define and manage crystallographic
 models in EasyDiffraction. It is assumed that you have already **imported the
 `easydiffraction` package** and created a **Job** object, as described in the
-[User Guide](../index).
+[Getting started](../getting-started.md) section.
 
 ## Defining a Model Manually
 
-You can manually define a model by specifying the **space group**, **unit cell
-parameters**, and **atomic positions**.
+You can manually define a model by specifying the **space group**,
+**unit cell parameters**, and **atomic positions**.
 
 #### Example: Creating a NaCl Model
 
@@ -54,8 +54,7 @@ phase.atom_sites.append(label='Cl',
 
 ## Loading a Model from a CIF File
 
-Instead of defining the model manually, you can load a crystallographic
-information file (CIF) directly:
+Instead of defining the model manually, you can load a crystallographic information file (CIF) directly:
 
 ```python
 # Load a phase from a CIF file

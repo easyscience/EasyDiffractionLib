@@ -4,13 +4,14 @@ icon: material/microscope
 
 # :material-microscope: Experiment
 
-The **Experiment** section describes the different types of **experimental
-diffraction data** that EasyDiffraction can process. This includes both
-**constant-wavelength neutron diffraction (CWL)**, **time-of-flight neutron
-diffraction (TOF)**, and **single-crystal neutron diffraction (SC CWL)**.
+The **Experiment** section describes the different types of
+**experimental diffraction data** that EasyDiffraction can process.
+This includes both **constant-wavelength neutron diffraction (CWL)**,
+**time-of-flight neutron diffraction (TOF)**, and
+**single-crystal neutron diffraction (SC CWL)**.
 
 EasyDiffraction supports **CIF-based(()) data formats and can also handle
-**measured data files\*\* in standard formats.
+**measured data files** in standard formats.
 
 ## CIF-based data description
 
@@ -217,12 +218,12 @@ be later modified within the software.
 #### Supported data file formats:
 
 * `.xye` or `.xys` (3 columns, including standard deviations)
-    * [\_pd_meas.2theta\_scan](dictionaries/_pd_meas.md),
-    * [\_pd_meas.intensity\_total](dictionaries/_pd_meas.md), 
-    * [\_pd_meas.intensity\_total\_su](dictionaries/_pd_meas.md).
+    * [\_pd_meas.2theta\_scan](../dictionaries/_pd_meas.md),
+    * [\_pd_meas.intensity\_total](../dictionaries/_pd_meas.md), 
+    * [\_pd_meas.intensity\_total\_su](../dictionaries/_pd_meas.md).
 * `.xy` (2 columns, no standard deviations):
-    * [\_pd_meas.2theta\_scan](dictionaries/_pd_meas.md),
-    * [\_pd_meas.intensity\_total](dictionaries/_pd_meas.md). 
+    * [\_pd_meas.2theta\_scan](../dictionaries/_pd_meas.md),
+    * [\_pd_meas.intensity\_total](../dictionaries/_pd_meas.md). 
 
 If no **standard deviations** are provided, they are automatically calculated as the **square root** of measured intensities.
 
@@ -293,7 +294,7 @@ Here are some examples:
 <!-- prettier-ignore-end -->
 
 <!-- prettier-ignore-start -->
-[3]: glossary.md
+[3]: ../terminology.md#glossary
 <!-- prettier-ignore-end -->
 
 Now that the Experiment has been defined, you can proceed to the next step:

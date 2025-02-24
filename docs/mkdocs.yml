@@ -1,21 +1,42 @@
+###########################
+# Override default settings
+###########################
+
 # Project information
 site_name: EasyDiffraction Library
 site_url: https://docs.diffraction.org/lib
 
 # Repository
-repo_url: https://github.com/easyscience/diffraction-lib
+repo_url: https://github.com/easyscience/EasyDiffractionLib
 edit_uri: edit/develop/docs/
 
 # Copyright
 copyright: © 2025 EasyDiffraction
 
+# Extra icons in the bottom right corner
+extra:
+  social:
+    - icon: easydiffraction  # File: overrides/.icons/easydiffraction.svg
+      link: https://easydiffraction.org
+    - icon: fontawesome/brands/github  # Name as in Font Awesome
+      link: https://github.com/EasyScience/EasyDiffractionLib
+
+# Jupyter notebooks
 plugins:
   - mkdocs-jupyter:
-      ignore: ['*emcee*.ipynb']
+      execute_ignore:
+        - '*emcee*.ipynb' # Ignore notebooks with 'emcee' in the name from execution
+
+##################
+# Add new settings
+##################
+
+# Exclude files and folders from the global navigation
+not_in_nav: |
+  index.md
+  usage/dictionaries
 
 # Format and layout of the global navigation for the site
-not_in_nav: |
-  usage/dictionaries
 nav:
   - Introduction:
       - Introduction: introduction/index.md
@@ -26,27 +47,27 @@ nav:
       - Terminology: usage/terminology.md
       - Getting Started: usage/getting-started.md
       - Workflow Steps:
-          - Workflow Steps: usage/workflow-steps/index.md
-          - Project: usage/workflow-steps/project.md
-          - Model: usage/workflow-steps/model.md
-          - Experiment: usage/workflow-steps/experiment.md
-          - Analysis: usage/workflow-steps/analysis.md
-          - Summary: usage/workflow-steps/summary.md
+        - Workflow Steps: usage/workflow-steps/index.md
+        - Project: usage/workflow-steps/project.md
+        - Model: usage/workflow-steps/model.md
+        - Experiment: usage/workflow-steps/experiment.md
+        - Analysis: usage/workflow-steps/analysis.md
+        - Summary: usage/workflow-steps/summary.md
   - Hands-on Tutorials:
       - Hands-on Tutorials: tutorials/index.md
       - Basic Examples:
-          - Define Model: examples/Define-model.ipynb
-          - Define Experiment: examples/Define-experiment.ipynb
+          - Define Model: tutorials/Define-model.ipynb
+          - Define Experiment: tutorials/Define-experiment.ipynb
       - Simulation:
-          - pd-xray NaCl: examples/Simulation_pd-xray_NaCl.ipynb
+          - pd-xray NaCl: tutorials/Simulation_pd-xray_NaCl.ipynb
       - Fitting:
-          - pd-neut-cwl LBCO-HRPT: examples/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
-          - pd-neut-tof Si-SEPD: examples/Fitting_pd-neut-tof_Si-SEPD.ipynb
-          - pd-neut-tof NCAF-WISH: examples/Fitting_pd-neut-tof_NCAF-WISH.ipynb
+          - pd-neut-cwl LBCO-HRPT: tutorials/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
+          - pd-neut-tof Si-SEPD: tutorials/Fitting_pd-neut-tof_Si-SEPD.ipynb
+          - pd-neut-tof NCAF-WISH: tutorials/Fitting_pd-neut-tof_NCAF-WISH.ipynb
       - Advanced fitting:
-          - MCMC pd-neut-tof NCAF-WISH: examples/Fitting-emcee_pd-neut-cwl_LBCO-HRPT.ipynb
+          - MCMC pd-neut-tof NCAF-WISH: tutorials/Fitting-emcee_pd-neut-cwl_LBCO-HRPT.ipynb
       - Additional examples:
-          - Change Minimizer: examples/Change-minimizer.ipynb
+          - Change Minimizer: tutorials/Change-minimizer.ipynb
   - API Reference:
       - API Reference: api/index.md
   - Contributing:

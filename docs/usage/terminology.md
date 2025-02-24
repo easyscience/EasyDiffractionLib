@@ -1,7 +1,7 @@
 # Terminology
 
-This page provides definitions of common **abbreviations**, **parameter names**
-and **data formats** used in EasyDiffraction.
+This page provides definitions of common **abbreviations**,
+**parameter names** and **data formats** used in EasyDiffraction.
 
 ## Input/Output data format
 
@@ -23,8 +23,7 @@ Below are common abbreviations used in the documentation and tutorials.
   [IUCr](https://www.iucr.org).
 - [pdCIF][2]{:.label-cif} Powder CIF dictionary by the
   [IUCr](https://www.iucr.org).
-- [customCIF][0]{:.label-cif} Custom CIF dictionary developed for
-  EasyDiffraction.
+- [customCIF][0]{:.label-cif} Custom CIF dictionary developed for EasyDiffraction.
 
 ### Experiment type labels
 
@@ -190,5 +189,5 @@ parameters.
 [0]: #
 [1]: https://www.iucr.org/resources/cif/dictionaries/browse/cif_core
 [2]: https://www.iucr.org/resources/cif/dictionaries/browse/cif_pd
-[3]: glossary.md
+[3]: #experiment-type-labels
 <!-- prettier-ignore-end -->

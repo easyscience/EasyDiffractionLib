@@ -16,7 +16,7 @@ env:
   # required to download the Jupyter notebooks from the easyscience/diffraction-lib repository
   # Set the NOTEBOOKS_DIR environment variable to be the directory containing the Jupyter notebooks
   CI_BRANCH: ${{ github.head_ref || github.ref_name }}
-  NOTEBOOKS_DIR: examples
+  NOTEBOOKS_DIR: tutorials
 
 jobs:
   # Job 1: Build the static files for the documentation site

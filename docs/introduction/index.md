@@ -6,16 +6,18 @@ icon: material/information-slab-circle
 
 ## Description
 
-EasyDiffraction is scientific software for calculating neutron powder
-diffraction patterns based on a structural model and refining its parameters
-against experimental data.
+EasyDiffraction is scientific software for
+calculating neutron powder diffraction patterns based on a structural
+   model and refining its parameters against experimental data.
 
-EasyDiffraction is distributed as both a cross-platform desktop application and
-a Python library.
+
+EasyDiffraction is distributed as both a cross-platform desktop application
+and a Python library.
 
 This documentation provides instructions for using the EasyDiffraction Python
-library. Documentation for the EasyDiffraction graphical user interface (GUI) is
-available [separately](https://docs.diffraction.org/app).
+library. Documentation for the EasyDiffraction graphical user interface (GUI)
+is available [separately](https://docs.diffraction.org/app).
+
 
 ![](../assets/images/hero_dark.png#gh-dark-mode-only)![](../assets/images/hero_light.png#gh-light-mode-only)
 
@@ -44,8 +46,7 @@ available on the
 
 ## Get in touch
 
-For general questions or comments, please contact us at
-[support@easydiffraction.org](mailto:support@easydiffraction.org).
+For general questions or comments, please contact us at [support@easydiffraction.org](mailto:support@easydiffraction.org).
 
 For bug reports and feature requests, please use
 [GitHub Issue Tracker](https://github.com/easyscience/diffraction-lib/issues)
@@ -61,5 +62,6 @@ The project is currently maintained by the
 [European Spallation Source (ESS)](https://ess.eu) in Sweden.
 
 If you'd like to contribute, please refer to the
-[:material-account-plus: Contributing section](contributing) for information
-about our code of conduct and instructions on submitting pull requests.
+[:material-account-plus: Contributing](../contributing/index.md) section for
+information about our code of conduct and instructions on submitting pull
+requests.

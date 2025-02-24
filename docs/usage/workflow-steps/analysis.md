@@ -5,8 +5,8 @@ icon: material/calculator
 # :material-calculator: Analysis
 
 This section provides an overview of **diffraction data analysis** in
-EasyDiffraction, focusing on model-dependent analysis, calculation engines, and
-minimization techniques.
+EasyDiffraction, focusing on model-dependent analysis, calculation engines,
+and minimization techniques.
 
 ### Model-dependent analysis
 
@@ -25,8 +25,8 @@ diffraction data.
 #### Workflow of model-dependent analysis
 
 The process of refining a model involves iterating through multiple steps until
-the calculated data sufficiently matches the experimental data. This process is
-illustrated below:
+the calculated data sufficiently matches the experimental data. This
+process is illustrated below:
 
 ```mermaid
 flowchart LR
@@ -62,17 +62,16 @@ diffraction data. It is now evolving into a more general purpose library and
 covers powders and single crystals, nuclear and (commensurate) magnetic
 structures, unpolarised neutron and X-ray diffraction.
 
-### [CrysFML](https://code.ill.fr/scientific-software/CrysFML2008).
+### [CrysFML](https://code.ill.fr/scientific-software/CrysFML2008)
 
-This library is a collection of Fortran modules for crystallographic
-computations. It is used in the software package
-[FullProf](https://www.ill.eu/sites/fullprof/), and we are currently working on
-its integration into EasyDiffraction.
+This library is a collection of Fortran modules for crystallographic computations.
+It is used in the software package [FullProf](https://www.ill.eu/sites/fullprof/), and we are
+currently working on its integration into EasyDiffraction.
 
 ## Minimisation engines
 
-EasyDiffraction utilizes various third-party libraries for model refinement and
-parameter optimization. These libraries provide robust curve fitting and
+EasyDiffraction utilizes various third-party libraries for model refinement
+and parameter optimization. These libraries provide robust curve fitting and
 uncertainty estimation tools.
 
 Most of the examples in this section will use the

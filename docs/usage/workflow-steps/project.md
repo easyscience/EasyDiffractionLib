@@ -22,16 +22,16 @@ analyzing, and refining diffraction experiments.
 
 <div class="cif">
 <pre>
-<span class="red"><b>La0.5Ba0.5CoO3</b></span>     - Project directory.
-├── <span class="orange"><b>project.cif</b></span>    - Main project description file.
-├── models         - Folder with individual crystallographic phases.
-│   ├── <span class="orange"><b>lbco.cif</b></span>   - File with La0.5Ba0.5CoO3 phase parameters.
+📁<span class="red"><b>La0.5Ba0.5CoO3</b></span>     - Project directory.
+├── 📄<span class="orange"><b>project.cif</b></span>    - Main project description file.
+├── 📁models         - Folder with individual crystallographic phases.
+│   ├── 📄<span class="orange"><b>lbco.cif</b></span>   - File with La0.5Ba0.5CoO3 phase parameters.
 │   └── ...
-├── experiments    - Folder with instrumental parameters and measured data.
-│   ├── <span class="orange"><b>hrpt.cif</b></span>   - Measured data from HRPT@PSI & instrumental parameters.
+├── 📁experiments    - Folder with instrumental parameters and measured data.
+│   ├── 📄<span class="orange"><b>hrpt.cif</b></span>   - Measured data from HRPT@PSI & instrumental parameters.
 │   └── ...
-└── summary
-    └── report.cif - Summary report after structure refinement.
+└── 📁summary
+    └── 📄report.cif - Summary report after structure refinement.
 </pre>
 </div>
 
@@ -107,8 +107,8 @@ O  O    0   0.5 0.5   1    Biso 1.4041
 
 ### experiments / <span class="orange">hrpt.cif</span>
 
-This file contains **instrumental parameters** and **measured diffraction
-data**.
+This file contains **instrumental parameters** and
+**measured diffraction data**.
 
 <!-- prettier-ignore-start -->
 

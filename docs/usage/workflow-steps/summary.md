@@ -6,25 +6,19 @@ icon: material/clipboard-text
 
 The **Summary** section represents the final step in the data processing
 workflow. It involves generating a **summary report** that consolidates the
-results of the diffraction data analysis, providing a comprehensive overview of
-the model refinement process and its outcomes.
+results of the diffraction data analysis, providing a comprehensive overview
+of the model refinement process and its outcomes.
 
 ## Contents of the Summary Report
 
 The summary report includes key details such as:
 
-- Final refined model parameters – Optimized crystallographic and instrumental
-  parameters.
-- Goodness-of-fit indicators – Metrics such as R-factors, chi-square (χ²), and
-  residuals.
-- Graphical representation – Visualization of experimental vs. calculated
-  diffraction patterns.
-- Background and peak analysis – Final background subtraction and peak fitting
-  details.
-- Uncertainty estimates – Error margins and confidence intervals for refined
-  parameters.
-- Data provenance – Information on input data sources, calculation engines, and
-  refinement history.
+- Final refined model parameters – Optimized crystallographic and instrumental parameters.
+- Goodness-of-fit indicators – Metrics such as R-factors, chi-square (χ²), and residuals.
+- Graphical representation – Visualization of experimental vs. calculated diffraction patterns.
+- Background and peak analysis – Final background subtraction and peak fitting details.
+- Uncertainty estimates – Error margins and confidence intervals for refined parameters.
+- Data provenance – Information on input data sources, calculation engines, and refinement history.
 
 ## Exporting the Summary Report
 
