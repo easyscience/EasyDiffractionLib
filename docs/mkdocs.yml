@@ -55,11 +55,19 @@ nav:
         - Summary: usage/workflow-steps/summary.md
   - Hands-on Tutorials:
       - Hands-on Tutorials: tutorials/index.md
-      - Basic Examples: []
-      - Simulation: []
-      - Fitting: []
-      - Advanced fitting: []
-      - Additional examples: []
+      - Basic Examples:
+          - Define Model: tutorials/Define-model.ipynb
+          - Define Experiment: tutorials/Define-experiment.ipynb
+      - Simulation:
+          - pd-xray NaCl: tutorials/Simulation_pd-xray_NaCl.ipynb
+      - Fitting:
+          - pd-neut-cwl LBCO-HRPT: tutorials/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
+          - pd-neut-tof Si-SEPD: tutorials/Fitting_pd-neut-tof_Si-SEPD.ipynb
+          - pd-neut-tof NCAF-WISH: tutorials/Fitting_pd-neut-tof_NCAF-WISH.ipynb
+      - Advanced fitting:
+          - MCMC pd-neut-tof NCAF-WISH: tutorials/Fitting-emcee_pd-neut-cwl_LBCO-HRPT.ipynb
+      - Additional examples:
+          - Change Minimizer: tutorials/Change-minimizer.ipynb
   - API Reference:
       - API Reference: api/index.md
   - Contributing:
