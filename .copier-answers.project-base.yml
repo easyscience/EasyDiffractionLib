@@ -7,8 +7,8 @@ project__deployment_type: both
 project__extended_description: "calculating neutron powder diffraction patterns based\
     \ on a structural\n   model and refining its parameters against experimental data"
 project__name: EasyDiffraction
-project__repos__app: diffraction-app
-project__repos__lib: diffraction-lib
+project__repos__app: EasyDiffractionApp
+project__repos__lib: EasyDiffractionLib
 project__repos__main: diffraction
 project__short_description: Diffraction data analysis
 project__tag: ED
