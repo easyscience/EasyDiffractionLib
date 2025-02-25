@@ -7,7 +7,7 @@ icon: material/cog-box
 ## Requirements
 
 EasyDiffraction is a multi-platform Python library compatible with **Python
-3.9 through 3.13**. Ensure Python is installed
+3.9 through 3.12**. Ensure Python is installed
 on your system before proceeding with the installation.
 
 ## Environment setup <small>optional</small> { #environment-setup data-toc-label="Environment setup" }
