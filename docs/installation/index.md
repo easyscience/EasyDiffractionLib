@@ -117,13 +117,13 @@ for testing purposes.
 To install EasyDiffraction from, e.g., the `develop` branch of GitHub:
 
 ```console
-pip install git+https://github.com/easyscience/diffraction-lib@develop
+pip install git+https://github.com/easyscience/EasyDiffractionLib@develop
 ```
 
 To include extra dependencies (e.g., charts):
 
 ```console
-pip install 'easydiffraction[charts] @ git+https://github.com/easyscience/diffraction-lib@develop'
+pip install 'easydiffraction[charts] @ git+https://github.com/easyscience/EasyDiffractionLib@develop'
 ```
 
 ## Running tutorials
@@ -141,7 +141,7 @@ You can also run these tutorials:
 These Jupyter Notebook examples can be downloaded either one by one from the
 [:material-school: Hands-on tutorials](../tutorials/index.md) section or all
 together as a zip archive from the
-[EasyDiffraction releases](https://github.com/easyscience/diffraction-lib/releases/latest).
+[EasyDiffraction releases](https://github.com/easyscience/EasyDiffractionLib/releases/latest).
 
 ### Run tutorials locally
 
@@ -155,7 +155,7 @@ Here are the steps to take in the case of Jupyter Notebook:
 - Download the latest EasyDiffraction tutorial examples from GitHub, e.g.,
   using curl:
   ```console
-  curl --location --remote-name https://github.com/easyscience/diffraction-lib/releases/latest/download/examples.zip
+  curl --location --remote-name https://github.com/easyscience/EasyDiffractionLib/releases/latest/download/examples.zip
   ```
 - Unzip the archive:
   ```console

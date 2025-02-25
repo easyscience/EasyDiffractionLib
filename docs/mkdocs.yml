@@ -7,7 +7,7 @@ site_name: EasyDiffraction Library
 site_url: https://docs.easydiffraction.org/lib
 
 # Repository
-repo_url: https://github.com/easyscience/diffraction-lib
+repo_url: https://github.com/easyscience/EasyDiffractionLib
 edit_uri: edit/develop/docs/
 
 # Copyright
@@ -19,7 +19,7 @@ extra:
     - icon: easydiffraction  # File: overrides/.icons/easydiffraction.svg
       link: https://easydiffraction.org
     - icon: fontawesome/brands/github  # Name as in Font Awesome
-      link: https://github.com/easyscience/diffraction-lib
+      link: https://github.com/easyscience/EasyDiffractionLib
 
 # Jupyter notebooks
 plugins:

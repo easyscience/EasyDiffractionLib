@@ -40,13 +40,13 @@ requests.
 **EasyDiffraction** is licensed under the [BSD 3-Clause License].
 
 <!-- prettier-ignore-start -->
-[BSD 3-Clause License]: https://github.com/easyscience/diffraction-lib/blob/master/LICENSE
-[Contributing Guidelines]: https://github.com/easyscience/diffraction-lib/blob/master/CONTRIBUTING.md
+[BSD 3-Clause License]: https://github.com/easyscience/EasyDiffractionLib/blob/master/LICENSE
+[Contributing Guidelines]: https://github.com/easyscience/EasyDiffractionLib/blob/master/CONTRIBUTING.md
 [EasyScience]: https://easyscience.software
 [European Spallation Source (ESS)]: https://ess.eu
 [Main Website]: https://easydiffraction.org
 [Documentation]: https://docs.easydiffraction.org/lib
-[Discussions]: https://github.com/easyscience/diffraction-lib/discussions
-[Issue Tracker]: https://github.com/easyscience/diffraction-lib/issues
-[Source Code]: https://github.com/easyscience/diffraction-lib
+[Discussions]: https://github.com/easyscience/EasyDiffractionLib/discussions
+[Issue Tracker]: https://github.com/easyscience/EasyDiffractionLib/issues
+[Source Code]: https://github.com/easyscience/EasyDiffractionLib
 <!-- prettier-ignore-end -->

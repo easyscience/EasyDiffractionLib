@@ -33,23 +33,23 @@ other scientific computing tools.
 ## License
 
 EasyDiffraction is licensed under the
-[BSD 3-Clause License](https://raw.githubusercontent.com/easyscience/diffraction-lib/master/LICENSE).
+[BSD 3-Clause License](https://raw.githubusercontent.com/easyscience/EasyDiffractionLib/master/LICENSE).
 
 ## Latest release
 
 The latest release of EasyDiffraction Python library is
-[{{ vars.release_version }}](https://github.com/easyscience/diffraction-lib/releases/latest).
+[{{ vars.release_version }}](https://github.com/easyscience/EasyDiffractionLib/releases/latest).
 
 Full release notes, including new features, bug fixes, and improvements, are
 available on the
-[GitHub Releases page](https://github.com/easyscience/diffraction-lib/releases).
+[GitHub Releases page](https://github.com/easyscience/EasyDiffractionLib/releases).
 
 ## Get in touch
 
 For general questions or comments, please contact us at [support@easydiffraction.org](mailto:support@easydiffraction.org).
 
 For bug reports and feature requests, please use
-[GitHub Issue Tracker](https://github.com/easyscience/diffraction-lib/issues)
+[GitHub Issue Tracker](https://github.com/easyscience/EasyDiffractionLib/issues)
 instead (free registration required).
 
 ## Contributing
