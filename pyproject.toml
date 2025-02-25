@@ -24,6 +24,8 @@ classifiers = [
 ]
 requires-python = '>=3.9,<=3.13'
 dependencies = [
+  'cryspy',              # Calculations of diffraction patterns
+  'easycrystallography', # Crystallography tools of the EasyScience framework
   'easyscience',         # The base library of the EasyScience framework
   'pooch',               # Data downloader
 ]
@@ -56,6 +58,11 @@ docs = [
   'mkdocs-markdownextradata-plugin', # MkDocs: Markdown extra data support, such as global variables
   'mkdocstrings-python',             # MkDocs: Python docstring support
   'pyyaml',                          # YAML parser
+]
+pdf = [
+  'diffpy.pdffit2',   # Calculations of atomic pair distribution function
+  'diffpy.structure', # Handling of crystal structures for the diffpy libraries
+  'diffpy.utils',     # General purpose shared utilities for the diffpy libraries
 ]
 
 [project.urls]
