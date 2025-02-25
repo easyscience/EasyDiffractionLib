@@ -5,46 +5,43 @@
 [project]
 name = 'easydiffraction'
 dynamic = ['version'] # Use versioningit to manage the version
-description = 'Making diffraction data analysis and modelling easy'
-authors = [
-  { name = 'EasyDiffraction contributors', email = 'support@easydiffraction.org' },
-]
+description = 'Diffraction data analysis'
+authors = [{ name = 'EasyScience contributors' }]
 readme = 'README.md'
 license = { file = 'LICENSE' }
 classifiers = [
+  'Intended Audience :: Science/Research',
   'Topic :: Scientific/Engineering',
-  'Development Status :: 4 - Beta',
   'License :: OSI Approved :: BSD License',
   'Operating System :: OS Independent',
   'Programming Language :: Python :: 3 :: Only',
   'Programming Language :: Python :: 3',
-  'Programming Language :: Python :: 3.9',
-  'Programming Language :: Python :: 3.10',
-  'Programming Language :: Python :: 3.11',
-  'Programming Language :: Python :: 3.12',
+      "Programming Language :: Python :: 3.9",
+      "Programming Language :: Python :: 3.10",
+      "Programming Language :: Python :: 3.11",
+      "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13",
 ]
-requires-python = '>=3.9,<3.13'
+requires-python = '>=3.9,<=3.13'
 dependencies = [
-  'cryspy',              # Calculations of diffraction patterns
-  'easycrystallography', # Crystallography tools of the EasyScience framework
   'easyscience',         # The base library of the EasyScience framework
-  'pooch',               # For data fetching
+  'pooch',               # Data downloader
 ]
 
 [project.optional-dependencies]
 dev = [
   'build',                   # Building the package
-  'jinja2',                  # Templating for the documentation
+  'jinja2',                  # Templating
   'nbmake',                  # Building notebooks
   'nbqa',                    # Linting and formatting notebooks
   'pytest',                  # Testing
-  'pytest-cov',              # Coverage
+  'pytest-cov',              # Test coverage
   'pytest-xdist',            # Enable parallel testing
   'ruff',                    # Linting and formatting code
   'validate-pyproject[all]', # Validate pyproject.toml
-  'versioningit',            # Versioning
+  'versioningit',            # Automatic versioning from git tags
 ]
-charts = [
+notebook = [
   'darkdetect',   # Detecting dark mode
   'pandas',       # Displaying tables in juptyer notebooks
   'plotly<6.0.0', # Interactive plots. 0.6.0 => Empty charts in Jupyter notebooks ...
@@ -57,19 +54,15 @@ docs = [
   'mkdocs-jupyter',                  # MkDocs: Jupyter notebook support
   'mkdocs-plugin-inline-svg',        # MkDocs: Inline SVG support
   'mkdocs-markdownextradata-plugin', # MkDocs: Markdown extra data support, such as global variables
-  'mkdocstrings',                    # MkDocs: Python docstring support
-]
-pdf = [
-  'diffpy.pdffit2',   # Calculations of atomic pair distribution function
-  'diffpy.structure', # Handling of crystal structures for the diffpy libraries
-  'diffpy.utils',     # General purpose shared utilities for the diffpy libraries
+  'mkdocstrings-python',             # MkDocs: Python docstring support
+  'pyyaml',                          # YAML parser
 ]
 
 [project.urls]
 homepage = 'https://easydiffraction.org'
 documentation = 'https://docs.easydiffraction.org/lib'
-source = 'https://github.com/EasyScience/EasyDiffractionLib'
-tracker = 'https://github.com/EasyScience/EasyDiffractionLib/issues'
+source = 'https://github.com/easyscience/diffraction-lib'
+tracker = 'https://github.com/easyscience/diffraction-lib/issues'
 
 ############################
 # Build system configuration

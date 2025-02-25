@@ -16,14 +16,14 @@ and a Python library.
 
 This documentation provides instructions for using the EasyDiffraction Python
 library. Documentation for the EasyDiffraction graphical user interface (GUI)
-is available [separately](https://docs.diffraction.org/app).
+is available [separately](https://docs.easydiffraction.org/app).
 
 
 ![](../assets/images/hero_dark.png#gh-dark-mode-only)![](../assets/images/hero_light.png#gh-light-mode-only)
 
 ## EasyScience Framework
 
-EasyDiffraction EasyDiffraction is built upon the
+EasyDiffraction is built upon the
 [EasyScience framework](https://easyscience.software), which provides essential
 tools for developing scientific libraries and applications.
 

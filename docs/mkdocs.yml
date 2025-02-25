@@ -4,10 +4,10 @@
 
 # Project information
 site_name: EasyDiffraction Library
-site_url: https://docs.diffraction.org/lib
+site_url: https://docs.easydiffraction.org/lib
 
 # Repository
-repo_url: https://github.com/easyscience/EasyDiffractionLib
+repo_url: https://github.com/easyscience/diffraction-lib
 edit_uri: edit/develop/docs/
 
 # Copyright
@@ -19,7 +19,7 @@ extra:
     - icon: easydiffraction  # File: overrides/.icons/easydiffraction.svg
       link: https://easydiffraction.org
     - icon: fontawesome/brands/github  # Name as in Font Awesome
-      link: https://github.com/EasyScience/EasyDiffractionLib
+      link: https://github.com/easyscience/diffraction-lib
 
 # Jupyter notebooks
 plugins:
@@ -55,19 +55,11 @@ nav:
         - Summary: usage/workflow-steps/summary.md
   - Hands-on Tutorials:
       - Hands-on Tutorials: tutorials/index.md
-      - Basic Examples:
-          - Define Model: tutorials/Define-model.ipynb
-          - Define Experiment: tutorials/Define-experiment.ipynb
-      - Simulation:
-          - pd-xray NaCl: tutorials/Simulation_pd-xray_NaCl.ipynb
-      - Fitting:
-          - pd-neut-cwl LBCO-HRPT: tutorials/Fitting_pd-neut-cwl_LBCO-HRPT.ipynb
-          - pd-neut-tof Si-SEPD: tutorials/Fitting_pd-neut-tof_Si-SEPD.ipynb
-          - pd-neut-tof NCAF-WISH: tutorials/Fitting_pd-neut-tof_NCAF-WISH.ipynb
-      - Advanced fitting:
-          - MCMC pd-neut-tof NCAF-WISH: tutorials/Fitting-emcee_pd-neut-cwl_LBCO-HRPT.ipynb
-      - Additional examples:
-          - Change Minimizer: tutorials/Change-minimizer.ipynb
+      - Basic Examples: []
+      - Simulation: []
+      - Fitting: []
+      - Advanced fitting: []
+      - Additional examples: []
   - API Reference:
       - API Reference: api/index.md
   - Contributing:

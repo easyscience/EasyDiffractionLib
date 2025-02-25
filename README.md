@@ -1,21 +1,16 @@
 <p>
   <picture>
     <!-- light mode logo -->
-    <source media='(prefers-color-scheme: light)' srcset='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/EasyDiffraction/logos/ed-logo_light.svg'>
+    <source media='(prefers-color-scheme: light)' srcset='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/easydiffraction/logos/light.svg'>
     <!-- dark mode logo -->
-    <source media='(prefers-color-scheme: dark)' srcset='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/EasyDiffraction/logos/ed-logo_dark.svg'>
+    <source media='(prefers-color-scheme: dark)' srcset='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/easydiffraction/logos/dark.svg'>
     <!-- default logo == light mode logo -->
-    <img src='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/EasyDiffraction/logos/ed-logo_light.svg' alt='EasyDiffraction'>
+    <img src='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/easydiffraction/logos/light.svg' alt='EasyDiffraction'>
   </picture>
 </p>
 
-**EasyDiffraction** is a Python library for calculating powder diffraction
-patterns based on structural models and refining their parameters against
-experimental data.
-
-This library serves as the foundation of the [EasyDiffraction Application], a
-user-friendly graphical interface that streamlines and accelerates the analysis
-of diffraction experiments.
+**EasyDiffraction** is a Python package for calculating neutron powder diffraction patterns based on a structural
+   model and refining its parameters against experimental data.
 
 **EasyDiffraction** is built upon the [EasyScience] framework, which provides
 essential tools for developing scientific libraries and applications.
@@ -45,14 +40,13 @@ requests.
 **EasyDiffraction** is licensed under the [BSD 3-Clause License].
 
 <!-- prettier-ignore-start -->
-[BSD 3-Clause License]: https://github.com/EasyScience/EasyDiffractionLib/blob/master/LICENSE
-[Contributing Guidelines]: https://github.com/EasyScience/EasyDiffractionLib/blob/master/CONTRIBUTING.md
-[EasyDiffraction Application]: https://github.com/EasyScience/EasyDiffractionApp
+[BSD 3-Clause License]: https://github.com/easyscience/diffraction-lib/blob/master/LICENSE
+[Contributing Guidelines]: https://github.com/easyscience/diffraction-lib/blob/master/CONTRIBUTING.md
 [EasyScience]: https://easyscience.software
 [European Spallation Source (ESS)]: https://ess.eu
 [Main Website]: https://easydiffraction.org
 [Documentation]: https://docs.easydiffraction.org/lib
-[Discussions]: https://github.com/EasyScience/EasyDiffractionLib/discussions
-[Issue Tracker]: https://github.com/EasyScience/EasyDiffractionLib/issues
-[Source Code]: https://github.com/EasyScience/EasyDiffraction
+[Discussions]: https://github.com/easyscience/diffraction-lib/discussions
+[Issue Tracker]: https://github.com/easyscience/diffraction-lib/issues
+[Source Code]: https://github.com/easyscience/diffraction-lib
 <!-- prettier-ignore-end -->

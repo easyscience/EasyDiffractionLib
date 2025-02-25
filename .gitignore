@@ -1,3 +1,15 @@
+# Python
+__pycache__
+.venv
+.coverage
+.pyc
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Node
+node_modules/
+
 # QtCreator
 *.autosave
 
@@ -12,30 +24,13 @@
 # QtCreator CMake
 CMakeLists.txt.user*
 
-# Python
-__pycache__
-.venv
-.coverage
-.pyc
+# PyCharm
+.idea/
 
-# PyInstaller
-build
-*.spec
-
-# Jupyter
-.ipynb_checkpoints
-
-# npm
-node_modules
+# VS Code
+.vscode/
 
 # macOS
 .DS_Store
 *.app
 *.dmg
-
-# Misc
-..*
-*.log
-*.zip
-.ci/
-.idea/

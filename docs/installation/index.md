@@ -7,7 +7,7 @@ icon: material/cog-box
 ## Requirements
 
 EasyDiffraction is a multi-platform Python library compatible with **Python
-3.9 through 3.12**. Ensure Python is installed
+3.9 through 3.13**. Ensure Python is installed
 on your system before proceeding with the installation.
 
 ## Environment setup <small>optional</small> { #environment-setup data-toc-label="Environment setup" }
@@ -71,8 +71,9 @@ recreate the environment.
 ### Installing from PyPI <small>recommended</small> { #from-pypi data-toc-label="Installing from PyPI" }
 
 EasyDiffraction is available on **PyPI (Python Package Index)** and
-can be installed using `pip`. It is recommended to install it within a
-[virtual environment](#environment-setup).
+can be installed using `pip`. It is advised to install it within a virtual
+environment, as outlined in the previous section
+[Environment setup](#environment-setup).
 
 We recommend installing the latest release of EasyDiffraction with the
 `charts` extras, which include optional dependencies used for simplified
