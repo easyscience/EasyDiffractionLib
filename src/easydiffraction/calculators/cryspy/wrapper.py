@@ -670,6 +670,8 @@ class CryspyWrapper(WrapperBase):
         self.calculator = Cryspy_calc()
         self._internal = None
         self._last_callback = {}
+        self.saved_kwargs = {}
+        self._iteration = 0
 
     @staticmethod
     def feature_checker(
@@ -719,7 +721,13 @@ class CryspyWrapper(WrapperBase):
 
     def fit_func(self, x_array: np.ndarray, *args, **kwargs) -> Union[np.ndarray, None]:
         if self._internal is not None:
+            self._iteration += 1
+            kwargs.update(self.saved_kwargs)
             calculation, self._last_callback = self._internal.full_callback(x_array, *args, **kwargs)
+            # This is where we notify the observer (QML) that the calculation has been performed.
+            if 'bridge' in kwargs:
+                bridge = kwargs['bridge']
+                bridge.intermediate_data_ready.emit(self._iteration, calculation)
             return calculation
 
     def set_exp_cif(self, cif: str) -> None:

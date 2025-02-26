@@ -635,6 +635,8 @@ class Cryspy:
         :return: points calculated at `x`
         :rtype: np.ndarray
         """
+        # save the bridge link
+        self.bridge = kwargs.pop('bridge', None)
         res = np.zeros_like(x_array)
         self.additional_data['ivar'] = res
         args = x_array
