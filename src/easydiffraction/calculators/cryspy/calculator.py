@@ -815,7 +815,7 @@ class Cryspy:
                 return
         elif key in CRYSPY_MODEL_INSTR_KEYS:
             # instrument param
-            exp_name = list(self._cryspyData._cryspyDict.keys())[1]
+            exp_name = list(self._cryspyData._cryspyDict.keys())[-1]
             cryspy_dict = self._cryspyData._cryspyDict[exp_name]
             cryspy_key = CRYSPY_MODEL_INSTR_KEYS[key]
             loc = cryspy_dict[cryspy_key]
