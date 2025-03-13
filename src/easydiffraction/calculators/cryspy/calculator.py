@@ -934,7 +934,6 @@ class Cryspy:
 
         # assure correct exp_name_model prefix.
         # for cwl it is 'pd_<name>', for tof it is 'tof_<name>'
-        # if is_tof and not exp_name_model.lower().startswith('tof'):
         if not exp_name_model.lower().startswith(self.model.PREFIX):
             exp_name_model_orig = exp_name_model
             # recast name from data_<name> to tof_<name>
@@ -964,8 +963,8 @@ class Cryspy:
         if is_tof:
             self._cryspyDict[exp_name_model]['profile_peak_shape'] = 'Gauss'
             self._cryspyDict[exp_name_model]['time'] = np.array(ttheta)  # required for TOF
-            self._cryspyDict[exp_name_model]['time_max'] = ttheta[-1]
-            self._cryspyDict[exp_name_model]['time_min'] = ttheta[0]
+            self._cryspyDict[exp_name_model]['time_max'] = float(ttheta[-1])
+            self._cryspyDict[exp_name_model]['time_min'] = float(ttheta[0])
             self._cryspyDict[exp_name_model]['background_time'] = self.pattern.backgrounds[0].x_sorted_points
             self._cryspyDict[exp_name_model]['background_intensity'] = self.pattern.backgrounds[0].y_sorted_points
             self._cryspyDict[exp_name_model]['flags_background_intensity'] = np.full(
@@ -973,6 +972,8 @@ class Cryspy:
             )
             for i, point in enumerate(self.pattern.backgrounds[0]):
                 self._cryspyDict[exp_name_model]['flags_background_intensity'][i] = not point.y.fixed
+            self._cryspyDict[exp_name_model]['k'] = [0]
+            self._cryspyDict[exp_name_model]['cthm'] = [0.91]
 
         else:
             self._cryspyDict[exp_name_model]['ttheta'] = ttheta
