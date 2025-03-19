@@ -771,13 +771,13 @@ class Cryspy:
         calcExperimentsDict = calcExperimentsObj.get_dictionary()
 
         calcDictBlockName = f'pd_{currentExperimentName}'
-        calcDictName = f'data_{currentExperimentName}'
+        # calcDictName = f'data_{currentExperimentName}'
 
         _, edExperimentsNoMeas = calcObjAndDictToEdExperiments(calcExperimentsObj, calcExperimentsDict)
 
         # self._cryspyData._cryspyObj.items[calcObjBlockIdx] = calcExperimentsObj.items[0]
         self._cryspyData._cryspyObj.items[0] = calcExperimentsObj.items[0]
-        self._cryspyData._cryspyDict[calcDictBlockName] = calcExperimentsDict[calcDictName]
+        self._cryspyData._cryspyDict[calcDictBlockName] = calcExperimentsDict[calcDictBlockName]
         sdataBlocksNoMeas = edExperimentsNoMeas[0]
 
         return sdataBlocksNoMeas

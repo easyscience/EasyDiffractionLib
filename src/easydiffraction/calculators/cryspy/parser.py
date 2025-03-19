@@ -307,7 +307,7 @@ def calcObjAndDictToEdExperiments(cryspy_obj, cryspy_dict):
                                 url='https://docs.easydiffraction.org/app/dictionaries/_diffrn_radiation/',
                                 cifDict='core',
                                 absDelta=0.01,
-                                units='Å',
+                                unit='Å',
                                 fittable=True,
                                 fit=item.wavelength_refinement,
                             )
@@ -328,7 +328,7 @@ def calcObjAndDictToEdExperiments(cryspy_obj, cryspy_dict):
                                 url='https://docs.easydiffraction.org/app/dictionaries/_pd_calib/',
                                 cifDict='pd',
                                 absDelta=0.2,
-                                units='°',
+                                unit='°',
                                 fittable=True,
                                 fit=item.offset_ttheta_refinement,
                             )

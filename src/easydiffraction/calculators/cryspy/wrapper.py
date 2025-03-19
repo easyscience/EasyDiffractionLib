@@ -801,7 +801,7 @@ class CryspyWrapper(WrapperBase):
         self.calculator.updateExpCif(cif_string, model_names)
 
     def replaceExpCif(self, cif_string: str, exp_name: str) -> None:
-        self.calculator.replaceExpCif(cif_string, exp_name)
+        return self.calculator.replaceExpCif(cif_string, exp_name)
 
     def full_callback(
         self,
