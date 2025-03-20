@@ -447,11 +447,11 @@ class Cryspy:
 
         if self.pattern is None:
             scale = 1.0
-            offset = 0
+            # offset = 0
         else:
             scale = self.pattern.scale.value / norm
-            offset = self.pattern.zero_shift.value
-        this_x_array = x_array - offset
+            # offset = self.pattern.zero_shift.value
+        # this_x_array = x_array - offset
 
         if 'excluded_points' in kwargs:
             setattr(self.model, 'excluded_points', kwargs['excluded_points'])
@@ -459,7 +459,8 @@ class Cryspy:
         if borg.debug:
             print('CALLING FROM Cryspy\n----------------------')
 
-        results, additional = self.do_calc_setup(scale, this_x_array, pol_fn)
+        # results, additional = self.do_calc_setup(scale, this_x_array, pol_fn)
+        results, additional = self.do_calc_setup(scale, x_array, pol_fn)
         if full_return:
             return results, additional
         return results
@@ -771,11 +772,8 @@ class Cryspy:
         calcExperimentsDict = calcExperimentsObj.get_dictionary()
 
         calcDictBlockName = f'pd_{currentExperimentName}'
-        # calcDictName = f'data_{currentExperimentName}'
-
         _, edExperimentsNoMeas = calcObjAndDictToEdExperiments(calcExperimentsObj, calcExperimentsDict)
 
-        # self._cryspyData._cryspyObj.items[calcObjBlockIdx] = calcExperimentsObj.items[0]
         self._cryspyData._cryspyObj.items[0] = calcExperimentsObj.items[0]
         self._cryspyData._cryspyDict[calcDictBlockName] = calcExperimentsDict[calcDictBlockName]
         sdataBlocksNoMeas = edExperimentsNoMeas[0]
