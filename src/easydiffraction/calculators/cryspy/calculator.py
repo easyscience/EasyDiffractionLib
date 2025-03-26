@@ -447,11 +447,11 @@ class Cryspy:
 
         if self.pattern is None:
             scale = 1.0
-            # offset = 0
+            offset = 0
         else:
             scale = self.pattern.scale.value / norm
-            # offset = self.pattern.zero_shift.value
-        # this_x_array = x_array - offset
+            offset = self.pattern.zero_shift.value
+        this_x_array = x_array - offset
 
         if 'excluded_points' in kwargs:
             setattr(self.model, 'excluded_points', kwargs['excluded_points'])
@@ -459,8 +459,7 @@ class Cryspy:
         if borg.debug:
             print('CALLING FROM Cryspy\n----------------------')
 
-        # results, additional = self.do_calc_setup(scale, this_x_array, pol_fn)
-        results, additional = self.do_calc_setup(scale, x_array, pol_fn)
+        results, additional = self.do_calc_setup(scale, this_x_array, pol_fn)
         if full_return:
             return results, additional
         return results
