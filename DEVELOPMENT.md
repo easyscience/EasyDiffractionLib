@@ -86,7 +86,7 @@ This is an example of a workflow that describes the development process.
   cp ../assets-branding/easydiffraction/icons/ed-icon_256x256.png docs/assets/images/favicon.png
   mkdir -p overrides/.icons/
   cp ../assets-branding/easydiffraction/icons/ed-icon_bw.svg overrides/.icons/easydiffraction.svg
-  cp ../assets-branding/easyscience-org/icons/eso-icon.svg overrides/.icons/easyscience.svg
+  cp ../assets-branding/easyscience-org/icons/eso-icon_bw.svg overrides/.icons/easyscience.svg
   cp -R examples/ docs/examples/
   cat ../assets-docs/mkdocs.yml docs/mkdocs.yml > mkdocs.yml
   ```
