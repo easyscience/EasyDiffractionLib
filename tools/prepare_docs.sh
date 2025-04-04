@@ -12,7 +12,7 @@ cp ../assets-branding/easydiffraction/logos/ed-logo-2_light.svg docs/assets/imag
 cp ../assets-branding/easydiffraction/icons/ed-icon_256x256.png docs/assets/images/favicon.png
 mkdir -p overrides/.icons/
 cp ../assets-branding/easydiffraction/icons/ed-icon_bw.svg overrides/.icons/easydiffraction.svg
-cp ../assets-branding/easyscience-org/icons/eso-logomark.svg overrides/.icons/easyscience.svg
+cp ../assets-branding/easyscience-org/icons/eso-icon_bw.svg overrides/.icons/easyscience.svg
 
 echo "\033[0;33m:::::: Add Jupyter notebooks from the project to the docs/\033[0m"
 cp -R examples/ docs/examples/
