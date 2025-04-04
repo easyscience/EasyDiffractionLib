@@ -15,8 +15,8 @@ from easycrystallography.Components.Site import Site as ecSite
 from easycrystallography.Components.Specie import Specie
 from easycrystallography.Components.Susceptibility import MagneticSusceptibility
 from easycrystallography.io.star_base import StarLoop
-from easyscience.Objects.ObjectClasses import Descriptor
-from easyscience.Objects.ObjectClasses import Parameter
+from easyscience.Objects.variable import DescriptorStr as Descriptor
+from easyscience.Objects.variable import Parameter
 
 if TYPE_CHECKING:
     from easyscience.Objects.Inferface import iF
@@ -100,7 +100,7 @@ class Atoms(ecAtoms):
         if not has_adp:
             return [main_loop]
         add_loops = []
-        adp_types = [item.adp.adp_type.raw_value for item in self]
+        adp_types = [item.adp.adp_type.value for item in self]
         if all(adp_types):
             if adp_types[0] in ['Uiso', 'Biso']:
                 main_loop = main_loop.join(

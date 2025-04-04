@@ -126,7 +126,7 @@ class CryspyBase(Neutron_type, metaclass=ABCMeta):
             )
         # Interface with Spacegroup
         elif issubclass(t_, SpaceGroup):
-            name = model.name_hm_alt.raw_value
+            name = model.name_hm_alt.value
             s_key = self.calculator.createSpaceGroup(key=model_key, name_hm_alt=name)
             keys = {'hermann_mauguin': 'name_hm_alt', 'coordinate-code': 'it_code'}
             r_list.append(
@@ -152,7 +152,7 @@ class CryspyBase(Neutron_type, metaclass=ABCMeta):
         # Now do anisotropic ADP
         elif issubclass(t_, Anisotropic_base):
             pars = model.get_parameters()
-            adp_pars = {par.name: par.raw_value for par in pars}
+            adp_pars = {par.name: par.value for par in pars}
             ref_name = self.calculator.attachADP(model_key, adp_pars)
             r_list.append(
                 ItemContainer(
@@ -169,7 +169,7 @@ class CryspyBase(Neutron_type, metaclass=ABCMeta):
             _ = self.calculator.createEmptyCrystal(model.name, key=model_key)
             self.calculator.assignCell_toCrystal(self._identify(model.cell), model_key)
             self.calculator.assignSpaceGroup_toCrystal(self._identify(model._spacegroup), model_key)
-            self.calculator.setPhaseScale(str(model_key), scale=model.scale.raw_value)
+            self.calculator.setPhaseScale(str(model_key), scale=model.scale.value)
             r_list.append(
                 ItemContainer(
                     model_key,
@@ -208,7 +208,7 @@ class CryspyBase(Neutron_type, metaclass=ABCMeta):
         """
         ident = self._identify(phase_obj, as_str=True) + '_phase'
         self.calculator.assignPhase(self._identify(phases_obj), ident)
-        self.calculator.setPhaseScale(self._identify(phase_obj), scale=phase_obj.scale.raw_value)
+        self.calculator.setPhaseScale(self._identify(phase_obj), scale=phase_obj.scale.value)
 
     def remove_phase(self, phases_obj: Phases, phase_obj: Phase) -> None:
         """
@@ -453,9 +453,9 @@ class POL(Pol_type):
         elif issubclass(t_, Site) or issubclass(t_, Site_base):
             if not hasattr(model, 'msp'):
                 return r_list
-            msp_type = model.msp.msp_type.raw_value
+            msp_type = model.msp.msp_type.value
             pars = model.msp.get_parameters()
-            msp_pars = {par.name: par.raw_value for par in pars}
+            msp_pars = {par.name: par.value for par in pars}
             ref_name = self.calculator.attachMSP(model_key, msp_type, msp_pars)
             r_list.append(
                 ItemContainer(
@@ -670,6 +670,8 @@ class CryspyWrapper(WrapperBase):
         self.calculator = Cryspy_calc()
         self._internal = None
         self._last_callback = {}
+        self.saved_kwargs = {}
+        self._iteration = 0
 
     @staticmethod
     def feature_checker(
@@ -719,7 +721,13 @@ class CryspyWrapper(WrapperBase):
 
     def fit_func(self, x_array: np.ndarray, *args, **kwargs) -> Union[np.ndarray, None]:
         if self._internal is not None:
+            self._iteration += 1
+            kwargs.update(self.saved_kwargs)
             calculation, self._last_callback = self._internal.full_callback(x_array, *args, **kwargs)
+            # This is where we notify the observer (QML) that the calculation has been performed.
+            if 'bridge' in kwargs:
+                bridge = kwargs['bridge']
+                bridge.intermediate_data_ready.emit(self._iteration, calculation)
             return calculation
 
     def set_exp_cif(self, cif: str) -> None:
@@ -793,7 +801,7 @@ class CryspyWrapper(WrapperBase):
         self.calculator.updateExpCif(cif_string, model_names)
 
     def replaceExpCif(self, cif_string: str, exp_name: str) -> None:
-        self.calculator.replaceExpCif(cif_string, exp_name)
+        return self.calculator.replaceExpCif(cif_string, exp_name)
 
     def full_callback(
         self,

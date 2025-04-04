@@ -143,6 +143,7 @@ class DiffractionJob(JobBase):
         self.datastore._simulations = self.sample
 
         self.interface = self.sample._interface
+        self.experiment.interface = self.interface
         self.analysis = analysis
         self.update_experiment_type()
 
@@ -159,6 +160,7 @@ class DiffractionJob(JobBase):
     def sample(self, value: Union[Sample, None]) -> None:
         # We need to deepcopy the sample to ensure that it is not shared between jobs
         if value is not None:
+            del self._sample
             self._sample = value
             # self._sample = deepcopy(value) # TODO fix deepcopy on EXC sample
         else:
@@ -340,12 +342,12 @@ class DiffractionJob(JobBase):
         # axis
         if self.type.is_tof:
             self._x_axis_name = 'time'
-            if self.experiment.pattern is not None:
-                self.experiment.pattern.zero_shift.unit = 'μs'
+            # if self.pattern is not None:
+            #    self.pattern.zero_shift.convert_unit('μs')
         else:
             self._x_axis_name = 'tth'
-            if self.experiment.pattern is not None:
-                self.experiment.pattern.zero_shift.unit = 'degree'
+            if self.pattern is not None:
+                self.pattern.zero_shift.convert_unit('degree')
 
     def update_exp_type(self) -> None:
         """
@@ -442,7 +444,10 @@ class DiffractionJob(JobBase):
             self.experiment.from_xye_file(file_url)
         else:
             self.experiment.from_cif_file(file_url)
+        self.update_after_new_experiment()
 
+    def update_after_new_experiment(self) -> None:
+        """ """
         self.update_experiment_type()
         # update the kwargs with new pointers
         self._kwargs['_parameters'] = self.experiment.parameters
@@ -454,20 +459,29 @@ class DiffractionJob(JobBase):
             pattern = self.experiment.pattern
             phases = self.sample.phases
             name = self.sample.name
-            self.sample = Sample(name, parameters=parameters, pattern=pattern, phases=phases)
-            # self.update_experiment_type()
-            # self.update_interface()
+
+            self.sample = Sample(
+                name=name,
+                parameters=parameters,
+                pattern=pattern,
+                phases=phases,
+                interface=self.interface,
+                dataset=self.datastore,
+            )  # 1980 ms
+            self.sample.parameters = self.experiment.parameters  # 360 ms
+            self.update_experiment_type()
+            self.update_interface()
         # Temporary fix for dtt1 and dtt2 parameters read from CIF in Scipp format
         if (
             hasattr(self.sample.parameters, 'dtt1')
             and hasattr(self.experiment.parameters, 'dtt1')
-            and self.sample.parameters.dtt1.raw_value != self.experiment.parameters.dtt1.raw_value
+            and self.sample.parameters.dtt1.value != self.experiment.parameters.dtt1.value
         ):
             self.sample.parameters.dtt1 = self.experiment.parameters.dtt1
         if (
             hasattr(self.sample.parameters, 'dtt2')
             and hasattr(self.experiment.parameters, 'dtt2')
-            and self.sample.parameters.dtt2.raw_value != self.experiment.parameters.dtt2.raw_value
+            and self.sample.parameters.dtt2.value != self.experiment.parameters.dtt2.value
         ):
             self.sample.parameters.dtt2 = self.experiment.parameters.dtt2
 
@@ -477,7 +491,7 @@ class DiffractionJob(JobBase):
         Just a wrapper around the Experiment class method.
         """
         self.experiment.from_cif_string(cif_string)
-        self.update_experiment_type()
+        self.update_after_new_experiment()
 
     def add_sample_from_file(self, file_url: str) -> None:
         """
@@ -657,8 +671,8 @@ class DiffractionJob(JobBase):
             self.interface._InterfaceFactoryTemplate__interface_obj.set_experiment_type(
                 tof=self.type.is_tof, pol=self.type.is_pol
             )
-        self.interface.generate_bindings(self)
-        self.generate_bindings()
+        # self.interface.generate_bindings(self)
+        # self.generate_bindings()
 
     # Charts
 
@@ -783,16 +797,16 @@ class DiffractionJob(JobBase):
         if self.type.is_pd and self.type.is_cwl:
             x_axis_title = '2θ (degree)'
             x = np.arange(
-                self.instrument.twotheta_range_min.raw_value,
-                self.instrument.twotheta_range_max.raw_value + self.instrument.twotheta_range_inc.raw_value,
-                self.instrument.twotheta_range_inc.raw_value,
+                self.instrument.twotheta_range_min.value,
+                self.instrument.twotheta_range_max.value + self.instrument.twotheta_range_inc.value,
+                self.instrument.twotheta_range_inc.value,
             )
         elif self.type.is_pd and self.type.is_tof:
             x_axis_title = 'TOF (µs)'
             x = np.arange(
-                self.instrument.tof_range_min.raw_value,
-                self.instrument.tof_range_max.raw_value + self.instrument.tof_range_inc.raw_value,
-                self.instrument.tof_range_inc.raw_value,
+                self.instrument.tof_range_min.value,
+                self.instrument.tof_range_max.value + self.instrument.tof_range_inc.value,
+                self.instrument.tof_range_inc.value,
             )
         else:
             print(f"Warning: Simulation chart not available for this type of job '{self.type}'")
@@ -1044,8 +1058,9 @@ class DiffractionJob(JobBase):
             if parameter.enabled:
                 name = self.get_full_parameter_name(parameter.unique_name, parameter.display_name, parameter.url)
                 parameters['name'].append(f'<name>{name}</name>')
-                parameters['value'].append(parameter.raw_value)
-                parameters['unit'].append(f'<unit>{parameter.unit:~P}</unit>')
+                parameters['value'].append(parameter.value)
+                # parameters['unit'].append(f'<unit>{parameter.unit:~P}</unit>')
+                parameters['unit'].append(f'<unit>{parameter.unit}</unit>')
                 parameters['error'].append(parameter.error) if parameter.error else parameters['error'].append('')
                 parameters['min'].append(parameter.min)
                 parameters['max'].append(parameter.max)
@@ -1057,8 +1072,9 @@ class DiffractionJob(JobBase):
         for parameter in self.get_fit_parameters():
             name = self.get_full_parameter_name(parameter.unique_name, parameter.display_name, parameter.url)
             parameters['name'].append(f'<name>{name}</name>')
-            parameters['value'].append(parameter.raw_value)
-            parameters['unit'].append(f'<unit>{parameter.unit:~P}</unit>')
+            parameters['value'].append(parameter.value)
+            # parameters['unit'].append(f'<unit>{parameter.unit:~P}</unit>')
+            parameters['unit'].append(f'<unit>{parameter.unit}</unit>')
             parameters['error'].append(parameter.error)
         return parameters
 
