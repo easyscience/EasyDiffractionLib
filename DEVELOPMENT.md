@@ -79,14 +79,14 @@ This is an example of a workflow that describes the development process.
   cp -R ../assets-docs/includes/ includes/
   cp -R ../assets-docs/overrides/ overrides/
   mkdir -p docs/assets/images/
-  cp ../assets-branding/EasyDiffraction/logos/ed-logo_dark.svg docs/assets/images/
-  cp ../assets-branding/EasyDiffraction/logos/ed-logo_light.svg docs/assets/images/
-  cp ../assets-branding/EasyDiffraction/logos/edl-logo_dark.svg docs/assets/images/logo_dark.svg
-  cp ../assets-branding/EasyDiffraction/logos/edl-logo_light.svg docs/assets/images/logo_light.svg
-  cp ../assets-branding/EasyDiffraction/icons/ed-icon_256x256.png docs/assets/images/favicon.png
+  cp ../assets-branding/easydiffraction/logos/ed-logo-2_dark.svg docs/assets/images/
+  cp ../assets-branding/easydiffraction/logos/ed-logo-2_light.svg docs/assets/images/
+  <!-- cp ../assets-branding/easydiffraction/logos/edl-logo_dark.svg docs/assets/images/logo_dark.svg
+  cp ../assets-branding/easydiffraction/logos/edl-logo_light.svg docs/assets/images/logo_light.svg -->
+  cp ../assets-branding/easydiffraction/icons/ed-icon_256x256.png docs/assets/images/favicon.png
   mkdir -p overrides/.icons/
-  cp ../assets-branding/EasyDiffraction/icons/ed-icon_bw.svg overrides/.icons/easydiffraction.svg
-  cp ../assets-branding/EasyScienceOrg/icons/eso-icon_bw.svg overrides/.icons/easyscience.svg
+  cp ../assets-branding/easydiffraction/icons/ed-icon_bw.svg overrides/.icons/easydiffraction.svg
+  cp ../assets-branding/easyscience-org/icons/eso-logomark.svg overrides/.icons/easyscience.svg
   cp -R examples/ docs/examples/
   cat ../assets-docs/mkdocs.yml docs/mkdocs.yml > mkdocs.yml
   ```

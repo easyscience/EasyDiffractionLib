@@ -1,11 +1,11 @@
 <p>
   <picture>
     <!-- light mode logo -->
-    <source media='(prefers-color-scheme: light)' srcset='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/EasyDiffraction/logos/ed-logo_light.svg'>
+    <source media='(prefers-color-scheme: light)' srcset='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/easydiffraction/logos/ed-logo-2_light.svg'>
     <!-- dark mode logo -->
-    <source media='(prefers-color-scheme: dark)' srcset='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/EasyDiffraction/logos/ed-logo_dark.svg'>
+    <source media='(prefers-color-scheme: dark)' srcset='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/easydiffraction/logos/ed-logo-2_dark.svg'>
     <!-- default logo == light mode logo -->
-    <img src='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/EasyDiffraction/logos/ed-logo_light.svg' alt='EasyDiffraction'>
+    <img src='https://raw.githubusercontent.com/easyscience/assets-branding/refs/heads/master/easydiffraction/logos/ed-logo-2_light.svg' alt='EasyDiffraction'>
   </picture>
 </p>
 

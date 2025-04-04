@@ -1,4 +1,4 @@
-![](assets/images/ed-logo_dark.svg#gh-dark-mode-only)![](assets/images/ed-logo_light.svg#gh-light-mode-only)
+![](assets/images/ed-logo-2_dark.svg#gh-dark-mode-only)![](assets/images/ed-logo-2_light.svg#gh-light-mode-only)
 
 # Making diffraction data analysis easy
 
