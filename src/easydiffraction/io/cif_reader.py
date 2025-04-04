@@ -121,8 +121,12 @@ def parameters_from_cif_block(block) -> dict:
         parameters['reflex_asymmetry_p3']['value'], parameters['reflex_asymmetry_p3']['error'] = parse_with_error(value)
     value = block.find_value('_pd_instr_reflex_asymmetry_p4') or block.find_value('_pd_instr.reflex_asymmetry_p4')
     if value is not None:
-        parameters['reflex_asymmetry_p3'] = {}
-        parameters['reflex_asymmetry_p3']['value'], parameters['reflex_asymmetry_p3']['error'] = parse_with_error(value)
+        parameters['reflex_asymmetry_p4'] = {}
+        parameters['reflex_asymmetry_p4']['value'], parameters['reflex_asymmetry_p4']['error'] = parse_with_error(value)
+    value = block.find_value('_pd_calib_2theta_offset') or block.find_value('_pd_calib.2theta_offset')
+    if value is not None:
+        parameters['zero_shift'] = {}
+        parameters['zero_shift']['value'], parameters['zero_shift']['error'] = parse_with_error(value)
 
     # ToF
     value = (
@@ -149,6 +153,12 @@ def parameters_from_cif_block(block) -> dict:
     if value is not None:
         parameters['2theta_bank'] = {}
         parameters['2theta_bank']['value'], parameters['2theta_bank']['error'] = parse_with_error(value)
+
+    value = block.find_value('_pd_instr.zero') or block.find_value('_pd_instr_zero')
+    if value is not None:
+        parameters['zero'] = {}
+        parameters['zero']['value'], parameters['zero']['error'] = parse_with_error(value)
+
     value = block.find_value('_pd_instr_peak_shape') or block.find_value('_pd_instr.peak_shape')
     if value is not None:
         parameters['peak_shape'] = value
@@ -310,8 +320,19 @@ def parse_with_error(value: str) -> tuple:
     if '(' in value:
         value, error = value.split('(')
         error = error.strip(')')
-        if not error:
-            return float(value), 0.0  # 1.23()
+        if '.' in value:
+            # float
+            if not error:
+                return float(value), 0.0  # 1.23()
+            else:
+                err = (10 ** -(len(f'{value}'.split('.')[1]) - 1)) * int(error)
+                return float(value), err
         else:
-            return float(value), float(error)  # 1.23(4)
+            # int
+            if not error:
+                return int(value), 0
+            else:
+                err = 10 ** (len(str(error)) - 1)
+                return int(value), err
+
     return float(value), None  # 1.23

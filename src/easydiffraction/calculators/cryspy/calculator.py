@@ -449,9 +449,8 @@ class Cryspy:
             scale = 1.0
             offset = 0
         else:
-            scale = self.pattern.scale.raw_value / norm
-            offset = self.pattern.zero_shift.raw_value
-
+            scale = self.pattern.scale.value / norm
+            offset = self.pattern.zero_shift.value
         this_x_array = x_array - offset
 
         if 'excluded_points' in kwargs:
@@ -492,8 +491,8 @@ class Cryspy:
             scale = 1.0
             offset = 0
         else:
-            scale = self.pattern.scale.raw_value / normalization
-            offset = self.pattern.zero_shift.raw_value
+            scale = self.pattern.scale.value / normalization
+            offset = self.pattern.zero_shift.value
         self.model['tof_parameters'].zero = offset
 
         this_x_array = x_array - offset
@@ -559,10 +558,10 @@ class Cryspy:
                     delattr(crystal, 'atom_site_susceptibility')
                 if hasattr(crystal, 'atom_site_scat'):
                     delattr(crystal, 'atom_site_scat')
-            idx = [idx for idx, item in enumerate(self.phases.items) if item.label == crystal.data_name][0]
+            idx = [idx for idx, item in enumerate(self.phases.items) if crystal.data_name in item.label][0]
             phasesL.items.append(self.phases.items[idx])
             phase_lists.append(phasesL)
-            profile, peak = self._do_run(self.model, self.polarized, this_x_array, crystal, phasesL, bg)
+            profile, peak = self._do_run(self.model, self.polarized, this_x_array, crystal, phasesL, bg, phase_scales)
             profiles.append(profile)
             peak_dat.append(peak)
         # pool = mp.ProcessPool(num_crys)
@@ -609,7 +608,6 @@ class Cryspy:
         self.additional_data['components'] = scaled_dependents
 
         total_profile = np.sum([s['profile'] for s in self.additional_data['phases'].values()], axis=0) + new_bg
-
         return total_profile, self.additional_data
 
     def calculate(self, x_array: np.ndarray, **kwargs) -> np.ndarray:
@@ -637,6 +635,8 @@ class Cryspy:
         :return: points calculated at `x`
         :rtype: np.ndarray
         """
+        # save the bridge link
+        self.bridge = kwargs.pop('bridge', None)
         res = np.zeros_like(x_array)
         self.additional_data['ivar'] = res
         args = x_array
@@ -771,10 +771,8 @@ class Cryspy:
         calcExperimentsDict = calcExperimentsObj.get_dictionary()
 
         calcDictBlockName = f'pd_{currentExperimentName}'
-
         _, edExperimentsNoMeas = calcObjAndDictToEdExperiments(calcExperimentsObj, calcExperimentsDict)
 
-        # self._cryspyData._cryspyObj.items[calcObjBlockIdx] = calcExperimentsObj.items[0]
         self._cryspyData._cryspyObj.items[0] = calcExperimentsObj.items[0]
         self._cryspyData._cryspyDict[calcDictBlockName] = calcExperimentsDict[calcDictBlockName]
         sdataBlocksNoMeas = edExperimentsNoMeas[0]
@@ -799,20 +797,22 @@ class Cryspy:
             cryspy_key = CRYSPY_MODEL_PHASE_KEYS[key]
             loc = cryspy_dict[cryspy_key]
             # find the text in `item` after the last underscore
+            # will fail if new phase added
             atom_index = int(item[item.rfind('_') + 1 :])
-            # is this a fractional coordinate?
-            if 'fract' in key:
-                coord_index = CRYSPY_MODEL_COORD_INDEX[key]
-                loc[coord_index][atom_index] = value
-            elif 'length' in key:
-                coord_index = CRYSPY_MODEL_COORD_INDEX[key]
-                loc[coord_index] = value
-            else:
-                loc[atom_index] = value
-            return
+            if atom_index < len(loc):
+                # is this a fractional coordinate?
+                if 'fract' in key:
+                    coord_index = CRYSPY_MODEL_COORD_INDEX[key]
+                    loc[coord_index][atom_index] = value
+                elif 'length' in key:
+                    coord_index = CRYSPY_MODEL_COORD_INDEX[key]
+                    loc[coord_index] = value
+                else:
+                    loc[atom_index] = value
+                return
         elif key in CRYSPY_MODEL_INSTR_KEYS:
             # instrument param
-            exp_name = list(self._cryspyData._cryspyDict.keys())[1]
+            exp_name = list(self._cryspyData._cryspyDict.keys())[-1]
             cryspy_dict = self._cryspyData._cryspyDict[exp_name]
             cryspy_key = CRYSPY_MODEL_INSTR_KEYS[key]
             loc = cryspy_dict[cryspy_key]
@@ -848,7 +848,7 @@ class Cryspy:
                             'k': peak_dat[idx]['index_hkl'][1],
                             'l': peak_dat[idx]['index_hkl'][2],
                         },
-                        'profile': scales[idx] * dependent[idx, :] / normalization,
+                        'profile': dependent[idx, :] / (normalization * len(scales)),
                         'components': {'total': dependent[idx, :]},
                         'profile_scale': scales[idx],
                     }
@@ -888,13 +888,14 @@ class Cryspy:
 
         return dependent, output
 
-    def _do_run(self, model, polarized, x_array, crystals, phase_list, bg):
+    def _do_run(self, model, polarized, x_array, crystals, phase_list, bg, phase_scales):
         idx = [idx for idx, item in enumerate(model.items) if isinstance(item, cryspy.PhaseL)][0]
         model.items[idx] = phase_list
-
         data_name = crystals.data_name
-        setattr(self.model, 'data_name', data_name)
 
+        # print("===========================================")
+        # print("        RUNNING PROFILE CALCULATION")
+        # print("===========================================")
         is_tof = False
         if self.model.PREFIX.lower() == 'tof':
             is_tof = True
@@ -904,15 +905,52 @@ class Cryspy:
         else:
             ttheta = np.radians(x_array)  # needs recasting into radians for CW
 
-        # model -> dict
-        experiment_dict_model = self.model.get_dictionary()
-        exp_name_model = experiment_dict_model['type_name']
-
         if not self._cryspyData._cryspyDict:
             return None
 
+        phase_name = ''
+        exp_name_model = ''
+        # Find the name of the experiment in the model
+        for key in self._cryspyData._cryspyDict.keys():
+            # skip phases
+            if 'crystal_' in key:
+                # remove 'crytal_' from the key
+                phase_name = key.split('_', 1)[1]
+                continue
+            exp_name_model = key
+            break
+
+        if not exp_name_model:
+            # no exp defined, default
+            exp_name_model = self.model.PREFIX + '_' + phase_name
+            # get cryspy experiment dict from the model: expensive!
+            # model -> dict
+            setattr(self.model, 'data_name', phase_name)
+            experiment_dict_model = self.model.get_dictionary()
+            self._cryspyData._cryspyDict[exp_name_model] = experiment_dict_model
+
+        # assure correct exp_name_model prefix.
+        # for cwl it is 'pd_<name>', for tof it is 'tof_<name>'
+        if not exp_name_model.lower().startswith(self.model.PREFIX):
+            exp_name_model_orig = exp_name_model
+            # recast name from data_<name> to tof_<name>
+            exp_name_model_suffix = exp_name_model.split('_')[1]
+            exp_name_model = self.model.PREFIX + '_' + exp_name_model_suffix
+            # get the dictionary from the model
+            experiment_dict_model = self.model.get_dictionary()
+            # remove old key
+            self._cryspyData._cryspyDict.pop(exp_name_model_orig)
+            # add new key
+            self._cryspyData._cryspyDict[exp_name_model] = experiment_dict_model
+            # modify type_name
+            self._cryspyData._cryspyDict[exp_name_model]['type_name'] = exp_name_model
+            # modify name
+            self._cryspyData._cryspyDict[exp_name_model]['name'] = exp_name_model_suffix
+
         self._cryspyDict = self._cryspyData._cryspyDict
-        self._cryspyDict[exp_name_model] = experiment_dict_model
+
+        # add extra fluff
+        self._cryspyDict[exp_name_model]['phase_scale'] = np.array(phase_scales)
 
         self.excluded_points = np.full(len(ttheta), False)
         if hasattr(self.model, 'excluded_points'):
@@ -920,9 +958,10 @@ class Cryspy:
         self._cryspyDict[exp_name_model]['excluded_points'] = self.excluded_points
         self._cryspyDict[exp_name_model]['radiation'] = [RAD_MAP[self.pattern.radiation]]
         if is_tof:
+            self._cryspyDict[exp_name_model]['profile_peak_shape'] = 'Gauss'
             self._cryspyDict[exp_name_model]['time'] = np.array(ttheta)  # required for TOF
-            self._cryspyDict[exp_name_model]['time_max'] = ttheta[-1]
-            self._cryspyDict[exp_name_model]['time_min'] = ttheta[0]
+            self._cryspyDict[exp_name_model]['time_max'] = float(ttheta[-1])
+            self._cryspyDict[exp_name_model]['time_min'] = float(ttheta[0])
             self._cryspyDict[exp_name_model]['background_time'] = self.pattern.backgrounds[0].x_sorted_points
             self._cryspyDict[exp_name_model]['background_intensity'] = self.pattern.backgrounds[0].y_sorted_points
             self._cryspyDict[exp_name_model]['flags_background_intensity'] = np.full(
@@ -930,6 +969,8 @@ class Cryspy:
             )
             for i, point in enumerate(self.pattern.backgrounds[0]):
                 self._cryspyDict[exp_name_model]['flags_background_intensity'][i] = not point.y.fixed
+            self._cryspyDict[exp_name_model]['k'] = [0]
+            self._cryspyDict[exp_name_model]['cthm'] = [0.91]
 
         else:
             self._cryspyDict[exp_name_model]['ttheta'] = ttheta
@@ -940,12 +981,18 @@ class Cryspy:
         # interestingly, experimental signal is required, although not used for simple profile calc
         self._cryspyDict[exp_name_model]['signal_exp'] = np.array([np.zeros(len(ttheta)), np.zeros(len(ttheta))])
 
+        # calculate profile
+        #
+        # _inOutDict contains the calculated profile
         res = rhochi_calc_chi_sq_by_dictionary(
             self._cryspyDict,
             dict_in_out=self._cryspyData._inOutDict,
             flag_use_precalculated_data=False,
             flag_calc_analytical_derivatives=False,
         )
+        if not res:
+            raise RuntimeError('No result from calculation')
+
         chi2 = res[0]
         point_count = res[1]
         free_param_count = len(res[4])

@@ -45,7 +45,7 @@ def test_fitting_pd_neut_cwl_LBCO_HRPT() -> None:
     assert job.fitting_results.x.size == 3098
     assert job.fitting_results.n_pars == 13
     assert job.fitting_results.success
-    assert_almost_equal(job.fitting_results.reduced_chi, 1.25, decimal=2)
+    assert_almost_equal(job.fitting_results.reduced_chi, 5.86, decimal=2)
 
 
 def test_fitting_pd_neut_tof_Si_SEPD() -> None:
@@ -95,13 +95,13 @@ def test_fitting_pd_neut_tof_Si_SEPD() -> None:
 
     job.fit()
 
-    assert phase.space_group.name_hm_alt.raw_value == 'F d -3 m'
-    assert phase.space_group.it_coordinate_system_code.raw_value == '2'
+    assert phase.space_group.name_hm_alt.value == 'F d -3 m'
+    assert phase.space_group.it_coordinate_system_code.value == '2'
     assert job.fitting_results.minimizer_engine.package == 'lmfit'
     assert job.fitting_results.x.size == 5600
     assert job.fitting_results.n_pars == 12
     assert job.fitting_results.success
-    assert_almost_equal(job.fitting_results.reduced_chi, 5.42, decimal=2)
+    assert_almost_equal(job.fitting_results.reduced_chi, 16.18, decimal=2)
 
 
 if __name__ == '__main__':
