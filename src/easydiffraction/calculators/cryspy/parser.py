@@ -1917,6 +1917,7 @@ def cifV2ToV1_tof(edCif):
         '_model.cif_file_name': '_model_cif_file_name',
         '_experiment.cif_file_name': '_experiment_cif_file_name',
         '_audit_contact_author.name': '_audit.contact_author_name',  # Temporary fix for CrysPy to accept CIFs
+        '_audit_contact_author.email': '_audit.contact_author_email',  # Temporary fix for CrysPy to accept CIFs
         '_audit_contact_author.id_orcid': '_audit.contact_author_id_orcid',  # Temporary fix for CrysPy to accept CIFs
     }
     edToCryspyNamesMap['cwl'] = {
