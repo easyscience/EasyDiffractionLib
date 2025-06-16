@@ -25,7 +25,7 @@ classifiers = [
 ]
 requires-python = '>=3.9,<3.13'
 dependencies = [
-  'cryspy',              # Calculations of diffraction patterns
+  'cryspy == 0.7.8',     # Calculations of diffraction patterns
   'easycrystallography', # Crystallography tools of the EasyScience framework
   'easyscience',         # The base library of the EasyScience framework
   'pooch',               # For data fetching
